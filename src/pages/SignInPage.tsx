@@ -33,8 +33,10 @@ const SignInPage = () => {
         </Title>
         <StyledForm
           onSubmit={handleSubmit(async data => {
-            await new Promise(r => setTimeout(r, 1000));
-            alert(JSON.stringify(data));
+            if (!Object.keys(errors).length) {
+              await new Promise(r => setTimeout(r, 1000));
+              alert(JSON.stringify(data));
+            }
           })}
         >
           <InputGroup
@@ -42,8 +44,7 @@ const SignInPage = () => {
             label="email"
             type="text"
             placeholder={PLACEHOLDER.email}
-            {...(register('email'),
-            {
+            {...register('email', {
               required: ERROR_MESSAGES.email_empty,
               pattern: {
                 value: REGEX.email,
@@ -51,17 +52,31 @@ const SignInPage = () => {
               },
             })}
             aria-invalid={errors.email ? true : false}
+            errmsg={
+              String(errors.email?.message) === 'undefined'
+                ? null
+                : String(errors.email?.message)
+            }
           />
-          {errors.email && (
-            <ErrorMessage>{String(errors.email.message)}</ErrorMessage>
-          )}
           <InputGroup
             id="password"
             label="password"
             type="password"
             isEyeIcon={true}
             placeholder={PLACEHOLDER.password}
-            {...register('password')}
+            {...register('password', {
+              required: ERROR_MESSAGES.password_empty,
+              pattern: {
+                value: REGEX.pw,
+                message: ERROR_MESSAGES.password_invalid,
+              },
+            })}
+            aria-invalid={errors.password ? true : false}
+            errmsg={
+              String(errors.password?.message) === 'undefined'
+                ? null
+                : String(errors.password?.message)
+            }
           />
           <Button type="submit" disabled={isSubmitting} className="login">
             로그인
@@ -131,11 +146,7 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2.4rem;
+  gap: 2rem;
 `;
-const ErrorMessage = styled.div`
-  color: red;
-  font-size: 1.4rem;
-  font-weight: 400;
-`;
+
 export default SignInPage;

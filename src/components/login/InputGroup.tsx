@@ -22,6 +22,7 @@ interface InputGroupProps {
   placeholder?: string;
   label: string;
   isEyeIcon?: boolean;
+  errmsg: string;
 }
 const InputGroup = ({
   id = '',
@@ -29,6 +30,7 @@ const InputGroup = ({
   placeholder,
   label,
   isEyeIcon = false,
+  errmsg,
 }: InputGroupProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -44,6 +46,7 @@ const InputGroup = ({
           id={id}
           type={showPassword ? 'text' : type}
           placeholder={placeholder}
+          errmsg={errmsg}
         />
         {isEyeIcon && (
           <IconContainer onClick={handleClick}>
@@ -57,6 +60,7 @@ const InputGroup = ({
           </IconContainer>
         )}
       </div>
+      <ErrorMessage>{errmsg}</ErrorMessage>
     </Container>
   );
 };
@@ -67,11 +71,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 1.2rem;
-
-  @media (min-width: 375px) and (max-width: 767px) {
-    gap: 1.2rem;
-  }
+  gap: 1rem;
 `;
 const IconContainer = styled.div`
   cursor: pointer;
@@ -80,5 +80,13 @@ const IconContainer = styled.div`
   left: 36.4rem;
   width: 1.6rem;
   height: 1.6rem;
+  @media (min-width: 375px) and (max-width: 767px) {
+    left: 29.4rem;
+  }
+`;
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 1.4rem;
+  font-weight: 400;
 `;
 export default InputGroup;
