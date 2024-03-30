@@ -12,17 +12,15 @@ interface LabelProps {
   htmlFor: string;
 }
 
-const Label: React.FC<LabelProps> = ({ children, htmlFor }) => {
+const Label = ({ children, htmlFor }: LabelProps) => {
   return <StyledLabel htmlFor={htmlFor}>{children}</StyledLabel>;
 };
 
 export default Label;
 
 const StyledLabel = styled.label`
-  display: block;
-  margin: 10px 0;
-  font-size: 18px;
-  font-weight: 500;
-  text-align: left;
-  color: #333;
+  color: ${({ theme }) => theme.black};
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: normal;
 `;

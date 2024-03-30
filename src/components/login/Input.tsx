@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 /**
@@ -17,12 +17,11 @@ interface InputProps {
   value?: string;
   className?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   id?: string;
 }
 
-const Input: React.FC<InputProps> = ({ type, className, placeholder, id }) => {
+const Input = ({ type, className, placeholder, id }: InputProps) => {
   return (
     <StyledInput
       id={id}
@@ -35,4 +34,22 @@ const Input: React.FC<InputProps> = ({ type, className, placeholder, id }) => {
 
 export default Input;
 
-const StyledInput = styled.input``;
+const StyledInput = styled.input`
+  display: flex;
+  width: 40rem;
+  padding: 1.8rem 1.5rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.8rem;
+  border: 0.1rem solid ${({ theme }) => theme.gray20};
+  background: ${({ theme }) => theme.white};
+
+  &:focus {
+    outline: none;
+    border: 0.1rem solid ${({ theme }) => theme.primary};
+  }
+
+  @media (min-width: 375px) and (max-width: 767px) {
+    max-width: 32.5rem;
+  }
+`;
