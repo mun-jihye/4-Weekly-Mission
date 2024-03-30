@@ -40,7 +40,11 @@ const InputGroup = ({
     <Container>
       <Label htmlFor={id}>{label}</Label>
       <div style={{ position: 'relative' }}>
-        <Input id={id} type={type} placeholder={placeholder} />
+        <Input
+          id={id}
+          type={showPassword ? 'text' : type}
+          placeholder={placeholder}
+        />
         {isEyeIcon && (
           <IconContainer onClick={handleClick}>
             <img

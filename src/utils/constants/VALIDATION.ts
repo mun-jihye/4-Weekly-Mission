@@ -1,14 +1,14 @@
 export const ERROR_MESSAGES = Object.freeze({
-  email_empty: '이메일을 입력해 주세요.',
+  email_empty: '이메일은 필수 입력입니다.',
   email_invalid: '올바른 이메일 형식이 아닙니다.',
   email_check: '이메일을 확인해 주세요.',
   email_duplicate: '이미 사용 중인 이메일입니다.',
 
-  password_empty: '비밀번호를 입력해 주세요.',
+  password_empty: '비밀번호은 필수 입력입니다.',
   password_invalid: '비밀번호는 영문, 숫자 조합 8자 이상 입력해 주세요.',
   password_check: '비밀번호를 확인해 주세요.',
 
-  pwConfirm_empty: '비밀번호 확인을 입력해 주세요.',
+  pwConfirm_empty: '비밀번호 확인은 필수 입력입니다.',
   pwConfirm_check: '비밀번호가 일치하지 않아요.',
 });
 
@@ -18,7 +18,7 @@ export const REGEX = Object.freeze({
 });
 
 export const PLACEHOLDER = Object.freeze({
-  email: 'codeit@codeit.com',
-  password: '********',
-  password_check: '********',
+  email: '이메일을 입력해 주세요.',
+  password: '비밀번호를 입력해 주세요.',
+  password_check: '비밀번호를 한번 더 입력해주세요',
 });

@@ -1,16 +1,24 @@
 import InputGroup from 'components/login/InputGroup';
 import React from 'react';
-import { PLACEHOLDER } from 'utils/constants/VALIDATION';
+import { ERROR_MESSAGES, PLACEHOLDER, REGEX } from 'utils/constants/VALIDATION';
 import { useForm } from 'react-hook-form';
 import Button from 'components/common/Button';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import routes from 'utils/constants/routes';
 
 const SignInPage = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm();
+
+  const handleClick = () => {
+    navigate(routes.signup);
+  };
+
   return (
     <MainContainer>
       <FlexContainer>
@@ -20,7 +28,7 @@ const SignInPage = () => {
           </a>
           <SubTitle>
             <span>회원이 아니신가요?</span>
-            <a href="./signUp.html">회원 가입하기</a>
+            <div onClick={handleClick}>회원 가입하기</div>
           </SubTitle>
         </Title>
         <StyledForm
@@ -34,8 +42,19 @@ const SignInPage = () => {
             label="email"
             type="text"
             placeholder={PLACEHOLDER.email}
-            {...register('email')}
+            {...(register('email'),
+            {
+              required: ERROR_MESSAGES.email_empty,
+              pattern: {
+                value: REGEX.email,
+                message: ERROR_MESSAGES.email_invalid,
+              },
+            })}
+            aria-invalid={errors.email ? true : false}
           />
+          {errors.email && (
+            <ErrorMessage>{String(errors.email.message)}</ErrorMessage>
+          )}
           <InputGroup
             id="password"
             label="password"
@@ -95,7 +114,7 @@ const SubTitle = styled.div`
     font-weight: 400;
     line-height: 2.4rem;
   }
-  a {
+  div {
     color: ${({ theme }) => theme.primary};
     font-family: 'Pretendard';
     font-size: 1.6rem;
@@ -103,6 +122,7 @@ const SubTitle = styled.div`
     font-weight: 600;
     line-height: normal;
     text-decoration: underline;
+    cursor: pointer;
   }
 `;
 const StyledForm = styled.form`
@@ -112,5 +132,10 @@ const StyledForm = styled.form`
   flex-direction: column;
   align-items: flex-start;
   gap: 2.4rem;
+`;
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 1.4rem;
+  font-weight: 400;
 `;
 export default SignInPage;
