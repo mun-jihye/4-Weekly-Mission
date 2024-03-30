@@ -1,5 +1,5 @@
 import InputGroup from 'components/login/InputGroup';
-import React from 'react';
+import React, { FocusEvent } from 'react';
 import { ERROR_MESSAGES, PLACEHOLDER, REGEX } from 'utils/constants/VALIDATION';
 import { useForm } from 'react-hook-form';
 import Button from 'components/common/Button';
@@ -17,6 +17,9 @@ const SignInPage = () => {
 
   const handleClick = () => {
     navigate(routes.signup);
+  };
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    e.preventDefault();
   };
 
   return (
@@ -44,8 +47,9 @@ const SignInPage = () => {
             label="email"
             type="text"
             placeholder={PLACEHOLDER.email}
+            handleBlur={handleBlur}
             {...register('email', {
-              required: ERROR_MESSAGES.email_empty,
+              required: { value: true, message: ERROR_MESSAGES.email_empty },
               pattern: {
                 value: REGEX.email,
                 message: ERROR_MESSAGES.email_invalid,
@@ -64,6 +68,7 @@ const SignInPage = () => {
             type="password"
             isEyeIcon={true}
             placeholder={PLACEHOLDER.password}
+            handleBlur={handleBlur}
             {...register('password', {
               required: ERROR_MESSAGES.password_empty,
               pattern: {

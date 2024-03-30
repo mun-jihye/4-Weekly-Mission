@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FocusEvent, useState } from 'react';
 import Label from './Label';
 import Input from './Input';
 import styled from 'styled-components';
@@ -23,6 +23,7 @@ interface InputGroupProps {
   label: string;
   isEyeIcon?: boolean;
   errmsg: string;
+  handleBlur: (event: FocusEvent<HTMLInputElement>) => void;
 }
 const InputGroup = ({
   id = '',
@@ -31,6 +32,7 @@ const InputGroup = ({
   label,
   isEyeIcon = false,
   errmsg,
+  handleBlur,
 }: InputGroupProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -47,6 +49,7 @@ const InputGroup = ({
           type={showPassword ? 'text' : type}
           placeholder={placeholder}
           errmsg={errmsg}
+          handleBlur={handleBlur}
         />
         {isEyeIcon && (
           <IconContainer onClick={handleClick}>

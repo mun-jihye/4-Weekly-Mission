@@ -1,4 +1,4 @@
-import React, { ChangeEvent, InputHTMLAttributes } from 'react';
+import React, { ChangeEvent, FocusEvent, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 /**
@@ -20,9 +20,17 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
   id?: string;
   errmsg: string;
+  handleBlur: (event: FocusEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ type, className, placeholder, id, errmsg }: InputProps) => {
+const Input = ({
+  type,
+  className,
+  placeholder,
+  id,
+  errmsg,
+  handleBlur,
+}: InputProps) => {
   return (
     <StyledInput
       id={id}
@@ -30,6 +38,7 @@ const Input = ({ type, className, placeholder, id, errmsg }: InputProps) => {
       type={type}
       placeholder={placeholder}
       errmsg={errmsg}
+      onBlur={handleBlur}
     />
   );
 };
