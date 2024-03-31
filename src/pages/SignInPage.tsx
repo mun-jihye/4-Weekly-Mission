@@ -21,6 +21,13 @@ const SignInPage = () => {
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     e.preventDefault();
   };
+  const onSubmitForm = data => {
+    // if (!Object.keys(errors).length) {
+    // await new Promise(r => setTimeout(r, 1000));
+    // alert(JSON.stringify(data));
+    // }
+    console.log('회원가입 정보', data);
+  };
 
   return (
     <MainContainer>
@@ -34,14 +41,7 @@ const SignInPage = () => {
             <div onClick={handleClick}>회원 가입하기</div>
           </SubTitle>
         </Title>
-        <StyledForm
-          onSubmit={handleSubmit(async data => {
-            if (!Object.keys(errors).length) {
-              await new Promise(r => setTimeout(r, 1000));
-              alert(JSON.stringify(data));
-            }
-          })}
-        >
+        <StyledForm onSubmit={handleSubmit(onSubmitForm)}>
           <InputGroup
             id="email"
             label="email"
