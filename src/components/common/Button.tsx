@@ -51,10 +51,11 @@ const StyledButton = styled.button`
   font-weight: 600;
 
   &.login {
-    width: 8rem;
+    width: 40rem;
+    height: 5.3rem;
 
-    @media (min-width: 768px) {
-      width: 12.8rem;
+    @media (min-width: 375px) and (max-width: 767px) {
+      width: 32.5rem;
     }
   }
 

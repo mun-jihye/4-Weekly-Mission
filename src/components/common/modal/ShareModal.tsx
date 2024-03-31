@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import kakao from 'assets/images/modal/kakao.png';
-import facebook from 'assets/images/modal/facebook.png';
+import kakao from 'assets/images/modal/Kakao.png';
+import facebook from 'assets/images/modal/Facebook.png';
 import copyLink from 'assets/images/modal/copyLink.png';
 import imageUrl from 'assets/images/meta.png';
 
