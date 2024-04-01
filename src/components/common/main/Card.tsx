@@ -24,7 +24,7 @@ interface CardProps {
   formattedDate: string;
   isFolder: boolean;
 }
-const Card: React.FC<CardProps> = ({
+const Card = ({
   url,
   imageURL,
   title,
@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({
   description,
   formattedDate,
   isFolder,
-}) => {
+}: CardProps) => {
   const defaultImage = '/images/noImage.png';
   return (
     <>

@@ -1,11 +1,10 @@
+import Link from 'next/link';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import routes from 'utils/constants/routes';
 import styled from 'styled-components';
 
 const Logo: React.FC = () => {
   return (
-    <Link to={routes.home}>
+    <Link href="/">
       <Img src="/images/linkbraryLogo.png" alt="logo" />
     </Link>
   );

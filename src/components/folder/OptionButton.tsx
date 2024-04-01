@@ -18,11 +18,11 @@ interface OptionButtonProps {
   folderName: string;
   categoryId: number;
 }
-const OptionButton: React.FC<OptionButtonProps> = ({
+const OptionButton = ({
   placeholder,
   folderName,
   categoryId,
-}) => {
+}: OptionButtonProps) => {
   const BUTTON = [
     { url: '/images/icons/share.png', name: '공유' },
     { url: '/images/icons/pen.png', name: '이름 변경' },
