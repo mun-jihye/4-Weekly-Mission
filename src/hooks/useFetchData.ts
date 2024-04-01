@@ -27,7 +27,7 @@ export const useFolderQuery = ({
   folderId,
 }: {
   queryKey: string;
-  folderId: 'all' | string;
+  folderId: string;
 }) => {
   return useQuery(['folder', queryKey], () => {
     return getFolderLink(folderId);

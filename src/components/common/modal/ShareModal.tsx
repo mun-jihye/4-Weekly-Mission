@@ -18,10 +18,10 @@ interface ShareModalProps {
 }
 declare global {
   interface Window {
-    Kakao: any; // ?? 이게 맞나
+    Kakao: any;
   }
 }
-const ShareModal: React.FC<ShareModalProps> = ({ subTitle, categoryId }) => {
+const ShareModal = ({ subTitle, categoryId }: ShareModalProps) => {
   const shareLink = `${window.location.origin}/shared/${categoryId}`;
   const { Kakao } = window;
 
@@ -48,7 +48,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ subTitle, categoryId }) => {
     window.open(
       'https://www.facebook.com/sharer/sharer.php?u=' + shareLink,
       '_blank',
-      'width=600,height=400',
+      'width=600,height=400'
     );
   };
   const handleCopyLink = () => {

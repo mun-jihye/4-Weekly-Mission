@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import Button from 'components/common/Button';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const SignInPage = () => {
   const router = useRouter();
@@ -29,71 +30,75 @@ const SignInPage = () => {
   };
 
   return (
-    <MainContainer>
-      <FlexContainer>
-        <Title>
-          <a href="/">
-            <Logo src="/images/linkbraryLogo.png" alt="로고이미지" />
-          </a>
-          <SubTitle>
-            <span>회원이 아니신가요?</span>
-            <div onClick={handleClick}>회원 가입하기</div>
-          </SubTitle>
-        </Title>
-        <StyledForm onSubmit={handleSubmit(onSubmitForm)}>
-          <InputGroup
-            id="email"
-            label="email"
-            type="text"
-            placeholder={PLACEHOLDER.email}
-            handleBlur={handleBlur}
-            {...register('email', {
-              required: { value: true, message: ERROR_MESSAGES.email_empty },
-              pattern: {
-                value: REGEX.email,
-                message: ERROR_MESSAGES.email_invalid,
-              },
-            })}
-            aria-invalid={errors.email ? true : false}
-            errmsg={
-              String(errors.email?.message) === 'undefined'
-                ? null
-                : String(errors.email?.message)
-            }
-          />
-          <InputGroup
-            id="password"
-            label="password"
-            type="password"
-            isEyeIcon={true}
-            placeholder={PLACEHOLDER.password}
-            handleBlur={handleBlur}
-            {...register('password', {
-              required: ERROR_MESSAGES.password_empty,
-              pattern: {
-                value: REGEX.pw,
-                message: ERROR_MESSAGES.password_invalid,
-              },
-            })}
-            aria-invalid={errors.password ? true : false}
-            errmsg={
-              String(errors.password?.message) === 'undefined'
-                ? null
-                : String(errors.password?.message)
-            }
-          />
-          <Button type="submit" disabled={isSubmitting} className="login">
-            로그인
-          </Button>
-        </StyledForm>
-      </FlexContainer>
-    </MainContainer>
+    <>
+      <Head> signin | Linkbrary</Head>
+      <MainContainer>
+        <FlexContainer>
+          <Title>
+            <a href="/">
+              <Logo src="/images/linkbraryLogo.png" alt="로고이미지" />
+            </a>
+            <SubTitle>
+              <span>회원이 아니신가요?</span>
+              <div onClick={handleClick}>회원 가입하기</div>
+            </SubTitle>
+          </Title>
+          <StyledForm onSubmit={handleSubmit(onSubmitForm)}>
+            <InputGroup
+              id="email"
+              label="email"
+              type="text"
+              placeholder={PLACEHOLDER.email}
+              handleBlur={handleBlur}
+              {...register('email', {
+                required: ERROR_MESSAGES.email_empty,
+                pattern: {
+                  value: REGEX.email,
+                  message: ERROR_MESSAGES.email_invalid,
+                },
+              })}
+              aria-invalid={errors.email ? true : false}
+              errmsg={
+                String(errors.email?.message) === 'undefined'
+                  ? null
+                  : String(errors.email?.message)
+              }
+            />
+            <InputGroup
+              id="password"
+              label="password"
+              type="password"
+              isEyeIcon={true}
+              placeholder={PLACEHOLDER.password}
+              handleBlur={handleBlur}
+              {...register('password', {
+                required: ERROR_MESSAGES.password_empty,
+                pattern: {
+                  value: REGEX.pw,
+                  message: ERROR_MESSAGES.password_invalid,
+                },
+              })}
+              aria-invalid={errors.password ? true : false}
+              errmsg={
+                String(errors.password?.message) === 'undefined'
+                  ? null
+                  : String(errors.password?.message)
+              }
+            />
+            <Button type="submit" disabled={isSubmitting} className="login">
+              로그인
+            </Button>
+          </StyledForm>
+        </FlexContainer>
+      </MainContainer>
+    </>
   );
 };
 
 const MainContainer = styled.div`
   display: flex;
   width: auto;
+  height: 100vh;
   padding: 23.8rem 0 25.2rem 0;
   justify-content: center;
   align-items: center;

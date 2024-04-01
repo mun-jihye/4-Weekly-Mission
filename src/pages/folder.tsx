@@ -13,8 +13,21 @@ import CardError from 'components/common/main/CardError';
 import filterByKeyword from 'utils/filterByKeyword';
 import FixedAddLink from 'components/common/header/folder/FixedAddLink';
 import { useRouter } from 'next/router';
+import { getCategory, getFolderLink } from 'lib/folderAPI';
+import Head from 'next/head';
 
-const FolderPage = () => {
+export async function getServerSideProps() {
+  const categoryData = await getCategory(1);
+  const initialFolderData = await getFolderLink('');
+  return {
+    props: {
+      categoryData,
+      initialFolderData,
+    },
+  };
+}
+
+const FolderPage = ({ categoryData, initialFolderData }) => {
   const router = useRouter();
   const [headerRef, inHeaderView] = useInView();
   const [footerRef, inFooterView] = useInView();
@@ -29,24 +42,20 @@ const FolderPage = () => {
     id: 'all',
     name: '전체',
   });
-
+  const [folderData, setFolderData] = useState(initialFolderData);
+  const [isLoading, setIsLoading] = useState(false);
   const folderId = currentCategory.id === 'all' ? '' : currentCategory.id;
 
-  const { data: folderDatas, isLoading } = useFolderQuery({
-    queryKey: folderId.toString(),
-    folderId: folderId,
-  });
-  const filteredLinks = filterByKeyword(folderDatas?.data || [], searchTerm);
+  // const { data: folderDatas, isLoading } = useFolderQuery({
+  //   queryKey: folderId.toString(),
+  //   folderId: folderId,
+  // });
+  const filteredLinks = filterByKeyword(folderData?.data || [], searchTerm);
   const hasFilteredLinks = filteredLinks.length !== 0;
 
-  useEffect(() => {
-    setSearchTerm(router.query.keyword ? String(router.query.keyword) : '');
-  }, [router.query.keyword]);
-
-  const { data: datas } = useCategoryQuery('category', 1);
-  const categoryDatas = datas?.data && [
+  const categoryDatas = categoryData?.data && [
     { id: 'all', name: '전체' },
-    ...datas?.data,
+    ...categoryData?.data,
   ];
 
   const handleCategoryButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -55,34 +64,54 @@ const FolderPage = () => {
       name: e.currentTarget.innerText,
     });
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      const data = await getFolderLink(folderId);
+      setFolderData(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, [folderId]);
+
+  useEffect(() => {
+    setSearchTerm(router.query.keyword ? String(router.query.keyword) : '');
+  }, [router.query.keyword]);
+
   return (
-    <CategoryContext.Provider value={datas}>
-      <HeaderContainer ref={headerRef}>
-        <AddLink isBottom={false} />
-      </HeaderContainer>
-      <MainContainer>
-        <Search
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          url={router.pathname}
-        />
-        <CategoryTabList
-          categoryDatas={categoryDatas}
-          currentCategory={currentCategory.name}
-          handleCategoryButton={handleCategoryButton}
-          categoryId={folderId}
-        />
-        {isLoading ? (
-          <Loader />
-        ) : hasFilteredLinks ? (
-          <CardGrid datas={filteredLinks} isFolder={true} />
-        ) : (
-          <CardError description="😰 일치하는 검색 결과가 없습니다." />
-        )}
-        {!inHeaderView && !inFooterView && <FixedAddLink />}
-      </MainContainer>
-      <div ref={footerRef}></div>
-    </CategoryContext.Provider>
+    <>
+      <Head>
+        <title>folder | Linkbrary</title>
+      </Head>
+      <CategoryContext.Provider value={categoryData}>
+        <HeaderContainer ref={headerRef}>
+          <AddLink isBottom={false} />
+        </HeaderContainer>
+        <MainContainer>
+          <Search
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            url={router.pathname}
+          />
+          <CategoryTabList
+            categoryDatas={categoryDatas}
+            currentCategory={currentCategory.name}
+            handleCategoryButton={handleCategoryButton}
+            categoryId={folderId}
+          />
+          {isLoading ? (
+            <Loader />
+          ) : hasFilteredLinks ? (
+            <CardGrid datas={filteredLinks} isFolder={true} />
+          ) : (
+            <CardError description="😰 일치하는 검색 결과가 없습니다." />
+          )}
+          {!inHeaderView && !inFooterView && <FixedAddLink />}
+        </MainContainer>
+        <div ref={footerRef}></div>
+      </CategoryContext.Provider>
+    </>
   );
 };
 

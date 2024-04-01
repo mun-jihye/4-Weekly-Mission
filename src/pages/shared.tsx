@@ -8,6 +8,7 @@ import CardError from 'components/common/main/CardError';
 import Loader from 'components/common/Loader';
 import { useRouter } from 'next/router';
 import filterByKeyword from 'utils/filterByKeyword';
+import Head from 'next/head';
 
 const SharedPage = () => {
   const router = useRouter();
@@ -18,7 +19,6 @@ const SharedPage = () => {
   const { data, isLoading, isError } = useSampleFolderQuery('sharedDatas');
   const sharedDatas = data?.folder.links;
   const filteredLinks = filterByKeyword(sharedDatas || [], searchTerm);
-  console.log(filteredLinks);
   const hasFilteredLinks = filteredLinks.length !== 0;
 
   useEffect(() => {
@@ -30,6 +30,9 @@ const SharedPage = () => {
   }
   return (
     <>
+      <Head>
+        <title>share | Linkbrary</title>
+      </Head>
       <SharedHeader />
       <MainContainer>
         <Search
