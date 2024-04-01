@@ -9,9 +9,7 @@ const nextConfig = {
 
     return config;
   },
-  compiler: {
-    styledComponents: true,
-  },
+  styledComponents: true,
 };
 
 module.exports = nextConfig;
