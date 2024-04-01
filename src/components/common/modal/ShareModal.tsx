@@ -12,18 +12,24 @@ interface ShareModalProps {
   subTitle: string;
   categoryId: number;
 }
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
+
 const ShareModal = ({ subTitle, categoryId }: ShareModalProps) => {
   const shareLink = `${window.location.origin}/shared/${categoryId}`;
   const { Kakao } = window;
 
   useEffect(() => {
-    Kakao.cleanup();
-    Kakao.init(process.env.REACT_APP_KAKAO_KEY);
+    const script = document.createElement('script');
+    script.src = 'https://developers.kakao.com/sdk/js/kakao.min.js';
+    script.async = true;
+    script.onload = () => {
+      window.Kakao.cleanup();
+      window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
 
   const handleKakao = () => {

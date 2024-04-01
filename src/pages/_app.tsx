@@ -4,6 +4,12 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'styles/GlobalStyle';
 import { theme } from 'styles/theme.js';
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
