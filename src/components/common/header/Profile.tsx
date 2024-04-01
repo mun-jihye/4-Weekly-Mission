@@ -1,4 +1,4 @@
-import { useUserQuery } from 'hook/useFetchData';
+import { useUserQuery } from 'hooks/useFetchData';
 import Button from '../Button';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';

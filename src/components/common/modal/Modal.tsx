@@ -2,7 +2,7 @@ import React, { ReactNode, useRef } from 'react';
 import Portal from './Portal';
 import styled from 'styled-components';
 import modalCloseButton from 'assets/images/modalCloseButton.png';
-import useCloseModal from 'hook/useCloseModal';
+import useCloseModal from 'hooks/useCloseModal';
 
 /**
  *

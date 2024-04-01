@@ -1,5 +1,5 @@
 import Loader from 'components/common/Loader';
-import { useSampleFolderQuery } from 'hook/useFetchData';
+import { useSampleFolderQuery } from 'hooks/useFetchData';
 import React from 'react';
 import styled from 'styled-components';
 import { HeaderContainer } from 'styles/HeaderContainer';
