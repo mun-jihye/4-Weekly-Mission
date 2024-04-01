@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
-const Logo: React.FC = () => {
+const Logo = () => {
   return (
     <Link href="/">
       <Img src="/images/linkbraryLogo.png" alt="logo" />

@@ -16,13 +16,13 @@ interface ButtonProps {
   className?: string;
   type?: 'button' | 'submit' | 'reset';
 }
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   children,
   onClick,
   disabled,
   className,
   type = 'button',
-}) => {
+}: ButtonProps) => {
   return (
     <StyledButton
       className={className}
