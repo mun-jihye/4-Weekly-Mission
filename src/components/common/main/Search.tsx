@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import closeIcon from 'assets/images/close-icon.png';
+import { useRouter } from 'next/router';
 
 interface SearchProps {
   searchTerm: string;
@@ -9,18 +9,18 @@ interface SearchProps {
   url: string;
 }
 
-const Search: React.FC<SearchProps> = ({ searchTerm, setSearchTerm, url }) => {
+const Search = ({ searchTerm, setSearchTerm, url }: SearchProps) => {
+  const router = useRouter();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigateToKeyword(searchTerm);
   };
-  const navigate = useNavigate();
 
   const navigateToKeyword = (input: string) => {
     const keyword = input?.replace(/(\s*)/g, '');
     if (keyword === '') return;
 
-    navigate({
+    router.push({
       pathname: url,
       search: `?keyword=${keyword}`,
     });
@@ -28,7 +28,7 @@ const Search: React.FC<SearchProps> = ({ searchTerm, setSearchTerm, url }) => {
   const clearInput = () => {
     if (searchTerm) {
       setSearchTerm('');
-      navigate({
+      router.push({
         pathname: url,
         search: '',
       });

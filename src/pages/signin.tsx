@@ -4,11 +4,10 @@ import { ERROR_MESSAGES, PLACEHOLDER, REGEX } from 'utils/constants/VALIDATION';
 import { useForm } from 'react-hook-form';
 import Button from 'components/common/Button';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import routes from 'utils/constants/routes';
+import { useRouter } from 'next/router';
 
 const SignInPage = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -16,7 +15,7 @@ const SignInPage = () => {
   } = useForm();
 
   const handleClick = () => {
-    navigate(routes.signup);
+    router.push('/signup');
   };
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     e.preventDefault();

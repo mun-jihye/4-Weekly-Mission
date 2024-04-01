@@ -1,16 +1,15 @@
 import { useUserQuery } from 'hooks/useFetchData';
 import Button from '../Button';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import routes from 'utils/constants/routes';
 import styled from 'styled-components';
 import Loader from '../Loader';
+import { useRouter } from 'next/router';
 
 const Profile: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleClick = () => {
-    navigate(routes.signin);
+    router.push('/signin');
   };
 
   const { data: profileData, isLoading } = useUserQuery();

@@ -11,14 +11,16 @@ import Loader from 'components/common/Loader';
 import CardGrid from 'components/common/main/CardGrid';
 import CardError from 'components/common/main/CardError';
 import filterByKeyword from 'utils/filterByKeyword';
-import { useLocation, useSearchParams } from 'react-router-dom';
 import FixedAddLink from 'components/common/header/folder/FixedAddLink';
+import { useRouter } from 'next/router';
 
-const FolderPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const location = useLocation();
+const FolderPage = () => {
+  const router = useRouter();
+  const [headerRef, inHeaderView] = useInView();
+  const [footerRef, inFooterView] = useInView();
+
   const [searchTerm, setSearchTerm] = useState<string>(
-    searchParams.get('keyword')
+    router.query.keyword ? String(router.query.keyword) : ''
   );
   const [currentCategory, setCurrentCategory] = useState<{
     id: string;
@@ -38,8 +40,8 @@ const FolderPage: React.FC = () => {
   const hasFilteredLinks = filteredLinks.length !== 0;
 
   useEffect(() => {
-    setSearchTerm(searchParams.get('keyword'));
-  }, [searchParams]);
+    setSearchTerm(router.query.keyword ? String(router.query.keyword) : '');
+  }, [router.query.keyword]);
 
   const { data: datas } = useCategoryQuery('category', 1);
   const categoryDatas = datas?.data && [
@@ -53,8 +55,6 @@ const FolderPage: React.FC = () => {
       name: e.currentTarget.innerText,
     });
   };
-  const [headerRef, inHeaderView] = useInView();
-  const [footerRef, inFooterView] = useInView();
   return (
     <CategoryContext.Provider value={datas}>
       <HeaderContainer ref={headerRef}>
@@ -64,7 +64,7 @@ const FolderPage: React.FC = () => {
         <Search
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          url={location.pathname}
+          url={router.pathname}
         />
         <CategoryTabList
           categoryDatas={categoryDatas}
@@ -74,14 +74,10 @@ const FolderPage: React.FC = () => {
         />
         {isLoading ? (
           <Loader />
+        ) : hasFilteredLinks ? (
+          <CardGrid datas={filteredLinks} isFolder={true} />
         ) : (
-          <>
-            {hasFilteredLinks ? (
-              <CardGrid datas={filteredLinks} isFolder={true} />
-            ) : (
-              <CardError description="😰 일치하는 검색 결과가 없습니다." />
-            )}
-          </>
+          <CardError description="😰 일치하는 검색 결과가 없습니다." />
         )}
         {!inHeaderView && !inFooterView && <FixedAddLink />}
       </MainContainer>

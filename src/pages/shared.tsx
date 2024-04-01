@@ -6,14 +6,13 @@ import CardGrid from 'components/common/main/CardGrid';
 import { useSampleFolderQuery } from 'hooks/useFetchData';
 import CardError from 'components/common/main/CardError';
 import Loader from 'components/common/Loader';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import filterByKeyword from 'utils/filterByKeyword';
 
-const SharedPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const location = useLocation();
+const SharedPage = () => {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState<string>(
-    searchParams.get('keyword')
+    router.query.keyword ? String(router.query.keyword) : ''
   );
 
   const { data, isLoading, isError } = useSampleFolderQuery('sharedDatas');
@@ -23,8 +22,8 @@ const SharedPage: React.FC = () => {
   const hasFilteredLinks = filteredLinks.length !== 0;
 
   useEffect(() => {
-    setSearchTerm(searchParams.get('keyword'));
-  }, [searchParams]);
+    setSearchTerm(router.query.keyword ? String(router.query.keyword) : '');
+  }, [router.query.keyword]);
 
   if (isError) {
     return <CardError description="😰 저장된 링크가 없습니다." />;
@@ -36,18 +35,14 @@ const SharedPage: React.FC = () => {
         <Search
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          url={location.pathname}
+          url={router.pathname}
         />
         {isLoading ? (
           <Loader />
+        ) : hasFilteredLinks ? (
+          <CardGrid datas={filteredLinks} isFolder={false} />
         ) : (
-          <>
-            {hasFilteredLinks ? (
-              <CardGrid datas={filteredLinks} isFolder={false} />
-            ) : (
-              <CardError description="😰 일치하는 검색 결과가 없습니다." />
-            )}
-          </>
+          <CardError description="😰 일치하는 검색 결과가 없습니다." />
         )}
       </MainContainer>
     </>
