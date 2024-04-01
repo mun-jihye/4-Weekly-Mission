@@ -1,6 +1,5 @@
 import React, { FormEvent } from 'react';
 import styled from 'styled-components';
-import closeIcon from 'assets/images/close-icon.png';
 import { useRouter } from 'next/router';
 
 interface SearchProps {

@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import kebab from 'assets/images/kebab.svg';
 import { useState } from 'react';
 import BUTTON from 'utils/constants/BUTTON';
 import Modal from 'components/common/modal/Modal';
@@ -15,7 +14,7 @@ import AddFolderModal from 'components/common/modal/AddFolderModal';
 interface KebabButtonProps {
   url: string;
 }
-const KebabButton: React.FC<KebabButtonProps> = ({ url }) => {
+const KebabButton = ({ url }: KebabButtonProps) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [optionName, setOptionName] = useState<string>('');
@@ -42,7 +41,7 @@ const KebabButton: React.FC<KebabButtonProps> = ({ url }) => {
   return (
     <>
       <StyledButton onClick={handleMenu}>
-        <img src={kebab} alt="더보기 버튼" />
+        <img src="/images/icons/kebab.svg" alt="더보기 버튼" />
         {showMenu && (
           <StyledModal>
             {BUTTON.KEBAB_OPTION.map(option => (

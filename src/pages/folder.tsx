@@ -4,7 +4,6 @@ import { HeaderContainer } from 'styles/HeaderContainer';
 import React, { useEffect, useState } from 'react';
 import { MainContainer } from 'styles/MainContainer';
 import Search from 'components/common/main/Search';
-import { useCategoryQuery, useFolderQuery } from 'hooks/useFetchData';
 import CategoryContext from 'contexts/CategoryContext';
 import CategoryTabList from 'components/folder/CategoryTabList';
 import Loader from 'components/common/Loader';
@@ -15,6 +14,7 @@ import FixedAddLink from 'components/common/header/folder/FixedAddLink';
 import { useRouter } from 'next/router';
 import { getCategory, getFolderLink } from 'lib/folderAPI';
 import Head from 'next/head';
+import Footer from 'components/common/footer/Footer';
 
 export async function getServerSideProps() {
   const categoryData = await getCategory(1);
@@ -44,15 +44,10 @@ const FolderPage = ({ categoryData, initialFolderData }) => {
   });
   const [folderData, setFolderData] = useState(initialFolderData);
   const [isLoading, setIsLoading] = useState(false);
-  const folderId = currentCategory.id === 'all' ? '' : currentCategory.id;
 
-  // const { data: folderDatas, isLoading } = useFolderQuery({
-  //   queryKey: folderId.toString(),
-  //   folderId: folderId,
-  // });
+  const folderId = currentCategory.id === 'all' ? '' : currentCategory.id;
   const filteredLinks = filterByKeyword(folderData?.data || [], searchTerm);
   const hasFilteredLinks = filteredLinks.length !== 0;
-
   const categoryDatas = categoryData?.data && [
     { id: 'all', name: '전체' },
     ...categoryData?.data,
@@ -111,6 +106,7 @@ const FolderPage = ({ categoryData, initialFolderData }) => {
         </MainContainer>
         <div ref={footerRef}></div>
       </CategoryContext.Provider>
+      <Footer />
     </>
   );
 };

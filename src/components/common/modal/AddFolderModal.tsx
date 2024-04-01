@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import Button from '../Button';
 import styled from 'styled-components';
 import CategoryContext, { CategoryContextType } from 'contexts/CategoryContext';
-import checkIcon from 'assets/images/modal/check.png';
 
 /**
  *
@@ -14,7 +13,7 @@ interface AddFolderModalProps {
   subTitle: string;
 }
 
-const AddFolderModal: React.FC<AddFolderModalProps> = ({ subTitle }) => {
+const AddFolderModal = ({ subTitle }: AddFolderModalProps) => {
   const folders = useContext<CategoryContextType | undefined>(CategoryContext);
 
   const [isSelected, setIsSelected] = useState<{ [key: string]: boolean }>({});
@@ -36,7 +35,9 @@ const AddFolderModal: React.FC<AddFolderModalProps> = ({ subTitle }) => {
               {folder.name}
               <span>{folder.link.count}개 링크</span>
             </FlexContainer>
-            {isSelected[folder.id] && <img src={checkIcon} alt="check icon" />}
+            {isSelected[folder.id] && (
+              <img src="/images/modal/check.png" alt="check icon" />
+            )}
           </FolderButton>
         ))}
       </ButtonContainer>

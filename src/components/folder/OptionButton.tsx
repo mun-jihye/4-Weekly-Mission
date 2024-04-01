@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import Share from 'assets/images/share.png';
-import Rename from 'assets/images/pen.png';
-import Delete from 'assets/images/delete.png';
 import styled from 'styled-components';
 import Modal from 'components/common/modal/Modal';
 import PostModal from 'components/common/modal/PostModal';
@@ -27,9 +24,9 @@ const OptionButton: React.FC<OptionButtonProps> = ({
   categoryId,
 }) => {
   const BUTTON = [
-    { url: Share, name: '공유' },
-    { url: Rename, name: '이름 변경' },
-    { url: Delete, name: '삭제' },
+    { url: '/images/icons/share.png', name: '공유' },
+    { url: '/images/icons/pen.png', name: '이름 변경' },
+    { url: '/images/icons/delete.png', name: '삭제' },
   ];
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalName, setModalName] = useState<string>('');

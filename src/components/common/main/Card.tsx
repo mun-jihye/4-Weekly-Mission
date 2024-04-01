@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import defaultImage from 'assets/images/noImage.png';
 import StarButton from 'components/folder/StarButton';
 import KebabButton from 'components/folder/KebabButton';
 
@@ -34,6 +33,7 @@ const Card: React.FC<CardProps> = ({
   formattedDate,
   isFolder,
 }) => {
+  const defaultImage = '/images/noImage.png';
   return (
     <>
       <StyledCard href={url} target="_blank" rel="noopener noreferrer">

@@ -1,7 +1,6 @@
 import React, { ReactNode, useRef } from 'react';
 import Portal from './Portal';
 import styled from 'styled-components';
-import modalCloseButton from 'assets/images/modalCloseButton.png';
 import useCloseModal from 'hooks/useCloseModal';
 
 /**
@@ -18,7 +17,7 @@ interface ModalProps {
   showModal: boolean;
   handleClose: () => void;
 }
-const Modal: React.FC<ModalProps> = ({ children, showModal, handleClose }) => {
+const Modal = ({ children, showModal, handleClose }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   useCloseModal(showModal, handleClose, modalRef);
   return (
@@ -26,7 +25,10 @@ const Modal: React.FC<ModalProps> = ({ children, showModal, handleClose }) => {
       <ModalWrapper>
         <ModalInner ref={modalRef}>
           <StyledButton onClick={handleClose}>
-            <img src={modalCloseButton} alt="modal close icon" />
+            <img
+              src="/images/modal/modalCloseButton.png"
+              alt="modal close icon"
+            />
           </StyledButton>
           {children}
         </ModalInner>

@@ -1,13 +1,13 @@
 import { styled } from 'styled-components';
-import filledStar from 'assets/images/fillStar.svg';
-import emptystar from 'assets/images/emptyStar.svg';
 
 interface StarButtonProps {
   isActive?: boolean;
 }
 
-const StarButton: React.FC<StarButtonProps> = ({ isActive }) => {
-  const src = isActive ? filledStar : emptystar;
+const StarButton = ({ isActive }: StarButtonProps) => {
+  const src = isActive
+    ? '/images/icons/fillStar.svg'
+    : '/images/icons/emptyStar.svg';
 
   return (
     <StyledButton>

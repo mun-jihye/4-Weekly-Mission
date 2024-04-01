@@ -1,9 +1,5 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import kakao from 'assets/images/modal/Kakao.png';
-import facebook from 'assets/images/modal/Facebook.png';
-import copyLink from 'assets/images/modal/copyLink.png';
-import imageUrl from 'assets/images/meta.png';
 
 /**
  *
@@ -36,7 +32,7 @@ const ShareModal = ({ subTitle, categoryId }: ShareModalProps) => {
       content: {
         title: 'Linkbrary',
         description: '세상의 모든 정보를 쉽게 관리해보세요',
-        imageUrl: imageUrl,
+        imageUrl: '/images/meta.png',
         link: {
           mobileWebUrl: shareLink,
           webUrl: shareLink,
@@ -70,19 +66,19 @@ const ShareModal = ({ subTitle, categoryId }: ShareModalProps) => {
       <GridContainer>
         <FlexContainer>
           <StyledButton className="kakao" onClick={handleKakao}>
-            <img src={kakao} alt="share by kakao" />
+            <img src="/images/modal/Kakao.png" alt="share by kakao" />
           </StyledButton>
           <StyledButtonName>카카오톡</StyledButtonName>
         </FlexContainer>
         <FlexContainer>
           <StyledButton className="facebook" onClick={handleFacebook}>
-            <img src={facebook} alt="share by facebook" />
+            <img src="/images/icons/Facebook.png" alt="share by facebook" />
           </StyledButton>
           <StyledButtonName>페이스북</StyledButtonName>
         </FlexContainer>
         <FlexContainer>
           <StyledButton className="copyLInk" onClick={handleCopyLink}>
-            <img src={copyLink} alt="share by copy lInk" />
+            <img src="/images/modal/copyLink.png" alt="share by copy lInk" />
           </StyledButton>
           <StyledButtonName>링크 복사</StyledButtonName>
         </FlexContainer>

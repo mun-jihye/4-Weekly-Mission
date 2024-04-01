@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import Add from 'assets/images/add.png';
-import Add2 from 'assets/images/add2.png';
 import { useState } from 'react';
 import Modal from 'components/common/modal/Modal';
 import PostModal from 'components/common/modal/PostModal';
@@ -24,11 +22,11 @@ interface CategoryProps {
   currentCategory: string;
   handleCategoryButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
-const Category: React.FC<CategoryProps> = ({
+const Category = ({
   categoryDatas,
   currentCategory,
   handleCategoryButton,
-}) => {
+}: CategoryProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const handleClick = () => {
     setShowModal(true);
@@ -131,11 +129,11 @@ const Text = styled.div`
 const Image = styled.div`
   width: 1.9rem;
   height: 1.9rem;
-  background-image: url(${Add});
+  background-image: url(/images/icons/add.png);
   background-repeat: no-repeat;
   background-size: cover;
   @media (max-width: 767px) {
-    background: url(${Add2});
+    background: url(/images/icons/add2.png);
     background-repeat: no-repeat;
     background-size: cover;
   }
