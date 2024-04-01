@@ -4,7 +4,7 @@ import styled from 'styled-components';
 interface CardErrorProps {
   description: string;
 }
-const CardError: React.FC<CardErrorProps> = ({ description }) => {
+const CardError = ({ description }: CardErrorProps) => {
   return (
     <StyledError>
       <div className="description">{description}</div>

@@ -14,7 +14,7 @@ interface CardGridProps {
   isFolder: boolean;
   datas: (UserLinksData | Link)[];
 }
-const CardGrid: React.FC<CardGridProps> = ({ datas, isFolder }) => {
+const CardGrid = ({ datas, isFolder }: CardGridProps) => {
   return (
     <CardContainer>
       {datas?.map(data => {

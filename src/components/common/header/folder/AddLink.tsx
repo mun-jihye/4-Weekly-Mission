@@ -6,7 +6,7 @@ import Modal from 'components/common/modal/Modal';
 interface AddLinkProps {
   isBottom: boolean;
 }
-const AddLink: React.FC<AddLinkProps> = ({ isBottom }) => {
+const AddLink = ({ isBottom }: AddLinkProps) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

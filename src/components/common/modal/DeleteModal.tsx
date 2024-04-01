@@ -13,7 +13,7 @@ interface DeleteModalProps {
   title: string;
   subTitle: string;
 }
-const DeleteModal: React.FC<DeleteModalProps> = ({ title, subTitle }) => {
+const DeleteModal = ({ title, subTitle }: DeleteModalProps) => {
   return (
     <Container>
       <StyledTitle>

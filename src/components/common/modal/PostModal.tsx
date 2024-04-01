@@ -15,11 +15,11 @@ interface PostModalProps {
   placeholder?: string;
   isAdd: boolean;
 }
-const PostModal: React.FC<PostModalProps> = ({
+const PostModal = ({
   title,
   placeholder = '내용 입력',
   isAdd,
-}) => {
+}: PostModalProps) => {
   return (
     <Container>
       <StyledTitle>{title}</StyledTitle>

@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { HeaderContainer } from 'styles/HeaderContainer';
 
-const Header: React.FC = () => {
+const Header = () => {
   const { data, isLoading, isError, error } =
     useSampleFolderQuery('folderInfo');
 

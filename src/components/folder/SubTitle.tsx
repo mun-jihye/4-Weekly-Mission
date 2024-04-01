@@ -13,7 +13,7 @@ interface SubTitleProps {
   currentCategory: string;
   categoryId: number;
 }
-const SubTitle: React.FC<SubTitleProps> = ({ currentCategory, categoryId }) => {
+const SubTitle = ({ currentCategory, categoryId }: SubTitleProps) => {
   return (
     <TitleContainer>
       <CategoryName>{Object.values(currentCategory)}</CategoryName>

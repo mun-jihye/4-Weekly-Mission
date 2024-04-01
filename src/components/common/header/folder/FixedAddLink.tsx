@@ -2,7 +2,7 @@ import { HeaderContainer } from 'styles/HeaderContainer';
 import AddLink from './AddLink';
 import styled from 'styled-components';
 
-const FixedAddLink: React.FC = () => {
+const FixedAddLink = () => {
   return (
     <>
       <FixedHeader>

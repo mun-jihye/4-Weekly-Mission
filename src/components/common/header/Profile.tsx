@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Loader from '../Loader';
 import { useRouter } from 'next/router';
 
-const Profile: React.FC = () => {
+const Profile = () => {
   const router = useRouter();
 
   const handleClick = () => {

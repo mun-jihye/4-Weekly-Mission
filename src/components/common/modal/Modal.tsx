@@ -9,7 +9,6 @@ import useCloseModal from 'hooks/useCloseModal';
  * @param {React.Node} props.children
  * @param {boolean} props.showModal 모달 보임 유뮤 결정
  * @param {Function} props.handleClose  모달 닫는 함수
- * @returns {React.FC}
  */
 
 interface ModalProps {
