@@ -6,6 +6,7 @@ import Button from 'components/common/Button';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const SignInPage = () => {
   const router = useRouter();
@@ -35,9 +36,9 @@ const SignInPage = () => {
       <MainContainer>
         <FlexContainer>
           <Title>
-            <a href="/">
+            <Link href="/">
               <Logo src="/images/linkbraryLogo.png" alt="로고이미지" />
-            </a>
+            </Link>
             <SubTitle>
               <span>회원이 아니신가요?</span>
               <div onClick={handleClick}>회원 가입하기</div>

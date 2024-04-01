@@ -47,7 +47,11 @@ const Search = ({ searchTerm, setSearchTerm, url }: SearchProps) => {
             onChange={e => setSearchTerm(e.target.value)}
           />
         </FlexContainer>
-        <CloseIcon src={closeIcon} alt="검색 결과 닫기" onClick={clearInput} />
+        <CloseIcon
+          src="/images/icons/close-icon.png"
+          alt="검색 결과 닫기"
+          onClick={clearInput}
+        />
       </SearchBar>
       {searchTerm && (
         <>

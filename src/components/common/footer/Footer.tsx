@@ -1,18 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import routes from 'utils/constants/routes';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const currentYear = new Date().getFullYear();
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <StyledFooter>
       <Copy>@codeit - {currentYear}</Copy>
       <FooterLink>
-        <Link to={routes.privacy}>
+        <Link href="/privacy">
           <FooterText>Privacy Policy</FooterText>
         </Link>
-        <Link to={routes.faq}>
+        <Link href="/faq">
           <FooterText>FAQ</FooterText>
         </Link>
       </FooterLink>

@@ -9,6 +9,7 @@ import Loader from 'components/common/Loader';
 import { useRouter } from 'next/router';
 import filterByKeyword from 'utils/filterByKeyword';
 import Head from 'next/head';
+import Footer from 'components/common/footer/Footer';
 
 const SharedPage = () => {
   const router = useRouter();
@@ -48,6 +49,7 @@ const SharedPage = () => {
           <CardError description="😰 일치하는 검색 결과가 없습니다." />
         )}
       </MainContainer>
+      <Footer />
     </>
   );
 };
