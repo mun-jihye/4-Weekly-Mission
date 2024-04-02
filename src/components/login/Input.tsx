@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FocusEvent, InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 /**
@@ -16,11 +16,11 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type: string;
   value?: string;
   className?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: () => void;
   placeholder: string;
   id?: string;
   errmsg: string;
-  handleBlur: (event: FocusEvent<HTMLInputElement>) => void;
+  handleBlur: () => void;
 }
 
 const Input = ({
