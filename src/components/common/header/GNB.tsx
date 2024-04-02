@@ -3,13 +3,13 @@ import Logo from '../Logo';
 import styled from 'styled-components';
 import Profile from './Profile';
 
-const GNB = () => {
+const Gnb = () => {
   return (
     <Nav>
-      <Gnb>
+      <FlextContainer>
         <Logo />
         <Profile />
-      </Gnb>
+      </FlextContainer>
     </Nav>
   );
 };
@@ -21,7 +21,7 @@ const Nav = styled.nav`
   width: 100%;
   background-color: #edf7ff;
 `;
-const Gnb = styled.div`
+const FlextContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,4 +40,4 @@ const Gnb = styled.div`
     padding: 0 20rem;
   }
 `;
-export default GNB;
+export default Gnb;
