@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 import { getCategory, getFolderLink } from 'lib/folderAPI';
 import Head from 'next/head';
 import Footer from 'components/common/footer/Footer';
-import Gnb from 'components/common/header/Gnb';
+import Gnb from '../components/common/header/Gnb';
 
 export async function getServerSideProps() {
   const categoryData = await getCategory(1);
