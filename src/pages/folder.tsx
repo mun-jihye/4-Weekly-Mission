@@ -16,7 +16,12 @@ import { getCategory, getFolderLink } from 'lib/folderAPI';
 import Head from 'next/head';
 import Footer from 'components/common/footer/Footer';
 import NavBar from 'components/common/header/NavBar';
+import { CategoryData, FolderLinkData } from 'types/folderDataType';
 
+interface FolderPageProps {
+  categoryData: CategoryData;
+  initialFolderData: FolderLinkData;
+}
 export async function getServerSideProps() {
   const categoryData = await getCategory(1);
   const initialFolderData = await getFolderLink('');
@@ -28,7 +33,8 @@ export async function getServerSideProps() {
   };
 }
 
-const FolderPage = ({ categoryData, initialFolderData }) => {
+const FolderPage = ({ categoryData, initialFolderData }: FolderPageProps) => {
+  console.log(categoryData, initialFolderData);
   const router = useRouter();
   const [headerRef, inHeaderView] = useInView();
   const [footerRef, inFooterView] = useInView();

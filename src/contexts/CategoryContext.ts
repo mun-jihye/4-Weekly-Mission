@@ -1,19 +1,6 @@
 import React from 'react';
+import { CategoryData } from 'types/folderDataType';
 
-interface Category {
-  id: string;
-  name: string;
-  link: {
-    count: number;
-  };
-}
-
-export interface CategoryContextType {
-  data: Category[];
-}
-
-const CategoryContext = React.createContext<CategoryContextType | undefined>(
-  undefined,
-);
+const CategoryContext = React.createContext<CategoryData>(undefined);
 
 export default CategoryContext;
