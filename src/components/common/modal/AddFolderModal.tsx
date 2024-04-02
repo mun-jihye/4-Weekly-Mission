@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import Button from '../Button';
 import styled from 'styled-components';
 import CategoryContext, { CategoryContextType } from 'contexts/CategoryContext';
+import Image from 'next/image';
 
 /**
  *
@@ -36,7 +37,12 @@ const AddFolderModal = ({ subTitle }: AddFolderModalProps) => {
               <span>{folder.link.count}개 링크</span>
             </FlexContainer>
             {isSelected[folder.id] && (
-              <img src="/images/modal/check.png" alt="check icon" />
+              <Image
+                src="/images/modal/check.png"
+                alt="check icon"
+                width={18}
+                height={18}
+              />
             )}
           </FolderButton>
         ))}

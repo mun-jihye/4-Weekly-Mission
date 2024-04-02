@@ -1,6 +1,7 @@
 import React, { FormEvent } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 interface SearchProps {
   searchTerm: string;
@@ -38,7 +39,12 @@ const Search = ({ searchTerm, setSearchTerm, url }: SearchProps) => {
     <>
       <SearchBar onSubmit={handleSubmit}>
         <FlexContainer>
-          <img src="/images/icons/search.svg" alt="Search Icon" />
+          <Image
+            src="/images/icons/search.svg"
+            alt="Search Icon"
+            width={18}
+            height={18}
+          />
           <SearchInput
             type="text"
             placeholder="링크를 검색해 보세요."
@@ -46,10 +52,12 @@ const Search = ({ searchTerm, setSearchTerm, url }: SearchProps) => {
             onChange={e => setSearchTerm(e.target.value)}
           />
         </FlexContainer>
-        <CloseIcon
+        <Image
           src="/images/icons/close-icon.png"
           alt="검색 결과 닫기"
           onClick={clearInput}
+          width={24}
+          height={24}
         />
       </SearchBar>
       {searchTerm && (
@@ -97,10 +105,6 @@ const SearchInput = styled.input`
   padding: 1rem;
   width: 100rem;
   background-color: #f5f5f5;
-`;
-const CloseIcon = styled.img`
-  width: 2.4rem;
-  height: 2.4rem;
 `;
 const SearchResult = styled.div`
   margin-bottom: 4rem;

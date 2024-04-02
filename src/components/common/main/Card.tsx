@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import StarButton from 'components/folder/StarButton';
 import KebabButton from 'components/folder/KebabButton';
+import Image from 'next/image';
 
 /**
  *
@@ -38,7 +39,17 @@ const Card = ({
     <>
       <StyledCard href={url} target="_blank" rel="noopener noreferrer">
         <CardImgContainer>
-          <CardImg src={imageURL || defaultImage} alt={title} />
+          {imageURL ? (
+            <CardImg src={imageURL} alt={title} />
+          ) : (
+            <Image
+              src={defaultImage}
+              width={340}
+              height={180}
+              alt="존재하지 않는 이미지"
+            />
+          )}
+
           {isFolder && <StarButton />}
         </CardImgContainer>
         <TextContainer>

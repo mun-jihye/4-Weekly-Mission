@@ -4,6 +4,7 @@ import BUTTON from 'utils/constants/BUTTON';
 import Modal from 'components/common/modal/Modal';
 import DeleteModal from 'components/common/modal/DeleteModal';
 import AddFolderModal from 'components/common/modal/AddFolderModal';
+import Image from 'next/image';
 
 /**
  *
@@ -41,7 +42,12 @@ const KebabButton = ({ url }: KebabButtonProps) => {
   return (
     <>
       <StyledButton onClick={handleMenu}>
-        <img src="/images/icons/kebab.svg" alt="더보기 버튼" />
+        <Image
+          src="/images/icons/kebab.svg"
+          alt="더보기 버튼"
+          width={21}
+          height={17}
+        />
         {showMenu && (
           <StyledModal>
             {BUTTON.KEBAB_OPTION.map(option => (

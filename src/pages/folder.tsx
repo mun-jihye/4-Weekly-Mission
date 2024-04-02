@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 import { getCategory, getFolderLink } from 'lib/folderAPI';
 import Head from 'next/head';
 import Footer from 'components/common/footer/Footer';
-import GNB from 'components/common/header/GNB';
+import Gnb from 'components/common/header/Gnb';
 
 export async function getServerSideProps() {
   const categoryData = await getCategory(1);
@@ -81,7 +81,7 @@ const FolderPage = ({ categoryData, initialFolderData }) => {
         <title>folder | Linkbrary</title>
       </Head>
       <CategoryContext.Provider value={categoryData}>
-        <GNB />
+        <Gnb />
         <HeaderContainer ref={headerRef}>
           <AddLink isBottom={false} />
         </HeaderContainer>

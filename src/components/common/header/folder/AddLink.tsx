@@ -3,6 +3,7 @@ import Button from 'components/common/Button';
 import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import Modal from 'components/common/modal/Modal';
+import Image from 'next/image';
 interface AddLinkProps {
   isBottom: boolean;
 }
@@ -26,6 +27,8 @@ const AddLink = ({ isBottom }: AddLinkProps) => {
           isBottom={isBottom}
           src="/images/icons/linkIcon.png"
           alt="link icon"
+          width={20}
+          height={20}
         />
         <StyledInput
           type="text"
@@ -60,7 +63,7 @@ const StyledForm = styled.form<AddLinkProps>`
     padding: 2.4rem 0 4rem;
   }
 `;
-const Icon = styled.img<AddLinkProps>`
+const Icon = styled(Image)<AddLinkProps>`
   position: absolute;
   left: 2rem;
   top: ${props => (props.isBottom ? '5.5rem' : '8.5rem')};

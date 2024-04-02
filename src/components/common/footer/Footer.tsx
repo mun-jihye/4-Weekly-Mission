@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const currentYear = new Date().getFullYear();
 const Footer = () => {
@@ -21,28 +22,48 @@ const Footer = () => {
           rel="noreferrer noopener"
           target="_blank"
         >
-          <img src="/images/icons/facebook.png" alt="facebook icon" />
+          <Image
+            src="/images/icons/facebook.png"
+            alt="facebook icon"
+            width={18}
+            height={18}
+          />
         </a>
         <a
           href="https://twitter.com/"
           rel="noreferrer noopener"
           target="_blank"
         >
-          <img src="/images/icons/twitter.png" alt="twitter icon" />
+          <Image
+            src="/images/icons/twitter.png"
+            alt="twitter icon"
+            width={18}
+            height={18}
+          />
         </a>
         <a
           href="https://youtube.com/"
           rel="noreferrer noopener"
           target="_blank"
         >
-          <img src="/images/icons/youtube.png" alt="youtube icon" />
+          <Image
+            src="/images/icons/youtube.png"
+            alt="youtube icon"
+            width={18}
+            height={18}
+          />
         </a>
         <a
           href="https://instagram.com/"
           rel="noreferrer noopener"
           target="_blank"
         >
-          <img src="/images/icons/instagram.png" alt="instagram icon" />
+          <Image
+            src="/images/icons/instagram.png"
+            alt="instagram icon"
+            width={18}
+            height={18}
+          />
         </a>
       </FooterIcon>
     </StyledFooter>

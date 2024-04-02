@@ -1,5 +1,6 @@
 import Loader from 'components/common/Loader';
 import { useSampleFolderQuery } from 'hooks/useFetchData';
+import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { HeaderContainer } from 'styles/HeaderContainer';
@@ -26,6 +27,8 @@ const Header = () => {
             <ProfileImage
               src={folderInfo.profileImage}
               alt={folderInfo.ownerName}
+              width={60}
+              height={60}
             />
             <OwnerName>@{folderInfo.ownerName}</OwnerName>
           </StyledProfile>
@@ -50,9 +53,7 @@ const StyledProfile = styled.div`
   align-items: center;
   row-gap: 1rem;
 `;
-const ProfileImage = styled.img`
-  width: 6rem;
-  height: 6rem;
+const ProfileImage = styled(Image)`
   object-fit: cover;
 `;
 

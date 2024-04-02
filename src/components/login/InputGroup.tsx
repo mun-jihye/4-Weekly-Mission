@@ -1,7 +1,8 @@
-import React, { ChangeEvent, FocusEvent, useState } from 'react';
+import React, { useState } from 'react';
 import Label from './Label';
 import Input from './Input';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 /**
  * @param {object} props
@@ -18,12 +19,12 @@ import styled from 'styled-components';
 interface InputGroupProps {
   id?: string;
   type: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: () => void;
   placeholder?: string;
   label: string;
   isEyeIcon?: boolean;
   errmsg: string;
-  handleBlur: (event: FocusEvent<HTMLInputElement>) => void;
+  handleBlur: () => void;
 }
 const InputGroup = ({
   id = '',
@@ -53,12 +54,14 @@ const InputGroup = ({
         />
         {isEyeIcon && (
           <IconContainer onClick={handleClick}>
-            <img
+            <Image
               id="pw-eyeIcon"
               src={`/images/icons/${showPassword ? 'eye-on' : 'eye-off'}.svg`}
               alt={
                 showPassword ? '비밀번호 숨기기 아이콘' : '비밀번호 보기 아이콘'
               }
+              width={16}
+              height={16}
             />
           </IconContainer>
         )}

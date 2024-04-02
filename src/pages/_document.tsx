@@ -1,9 +1,9 @@
 import Document, {
   Html,
-  Head,
   Main,
   NextScript,
   DocumentContext,
+  Head,
 } from 'next/document';
 import Link from 'next/link';
 import { ServerStyleSheet } from 'styled-components';
@@ -48,7 +48,6 @@ export default class MyDocument extends Document {
           integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8"
           crossOrigin="anonymous"
         ></script>
-        <title>Linkbrary</title>
       </Head>
       <body>
         <Main />

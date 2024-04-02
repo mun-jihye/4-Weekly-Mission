@@ -2,6 +2,7 @@ import React, { ReactNode, useRef } from 'react';
 import Portal from './Portal';
 import styled from 'styled-components';
 import useCloseModal from 'hooks/useCloseModal';
+import Image from 'next/image';
 
 /**
  *
@@ -24,9 +25,11 @@ const Modal = ({ children, showModal, handleClose }: ModalProps) => {
       <ModalWrapper>
         <ModalInner ref={modalRef}>
           <StyledButton onClick={handleClose}>
-            <img
+            <Image
               src="/images/modal/modalCloseButton.png"
               alt="modal close icon"
+              width={24}
+              height={24}
             />
           </StyledButton>
           {children}
