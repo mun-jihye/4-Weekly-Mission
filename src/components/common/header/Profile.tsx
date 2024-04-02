@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Loader from '../Loader';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const Profile = () => {
   const router = useRouter();
@@ -26,7 +27,13 @@ const Profile = () => {
     <>
       {data ? (
         <ProfileContainer>
-          <ProfileImg src={data.image_source} alt="Profile" />
+          <Image
+            src={data.image_source}
+            alt="Profile"
+            width={28}
+            height={28}
+            style={{ borderRadius: '1.5rem' }}
+          />
           <ProfileEmail>{data.email}</ProfileEmail>
         </ProfileContainer>
       ) : (
@@ -43,11 +50,6 @@ const ProfileContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-`;
-const ProfileImg = styled.img`
-  width: 2.8rem;
-  height: 2.8rem;
-  border-radius: 1.5rem;
 `;
 const ProfileEmail = styled.p`
   font-size: 1.4rem;

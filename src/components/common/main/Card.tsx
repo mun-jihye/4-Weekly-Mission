@@ -40,7 +40,12 @@ const Card = ({
       <StyledCard href={url} target="_blank" rel="noopener noreferrer">
         <CardImgContainer>
           {imageURL ? (
-            <CardImg src={imageURL} alt={title} />
+            <CardImg
+              src={imageURL}
+              alt={title}
+              fill
+              style={{ objectFit: 'cover' }}
+            />
           ) : (
             <Image
               src={defaultImage}
@@ -89,8 +94,9 @@ const CardImgContainer = styled.div`
   height: 20rem;
   border-radius: 1.5rem 1.5rem 0 0;
   overflow: hidden;
+  position: relative;
 `;
-const CardImg = styled.img`
+const CardImg = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
