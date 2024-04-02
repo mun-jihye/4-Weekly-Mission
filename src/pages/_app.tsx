@@ -5,6 +5,7 @@ import GlobalStyle from 'styles/GlobalStyle';
 import { theme } from 'styles/theme.js';
 
 declare global {
+  /* eslint-disable-next-line */
   interface Window {
     Kakao: any;
   }

@@ -4,11 +4,9 @@ import styled from 'styled-components';
 
 const FixedAddLink = () => {
   return (
-    <>
-      <FixedHeader>
-        <AddLink isBottom={true} />
-      </FixedHeader>
-    </>
+    <FixedHeader>
+      <AddLink isBottom={true} />
+    </FixedHeader>
   );
 };
 

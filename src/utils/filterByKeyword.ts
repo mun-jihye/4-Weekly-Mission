@@ -28,9 +28,9 @@ const filterByKeyword = (data: (UserLinksData | Link)[], keyword: Keyword) => {
 
   return data.filter(item => {
     return (
-      item?.url?.toLowerCase().includes(lowerCaseKeyword) ||
-      item?.title?.toLowerCase().includes(lowerCaseKeyword) ||
-      item?.description?.toLowerCase().includes(lowerCaseKeyword)
+      item.url?.toLowerCase().includes(lowerCaseKeyword) ||
+      item.title?.toLowerCase().includes(lowerCaseKeyword) ||
+      item.description?.toLowerCase().includes(lowerCaseKeyword)
     );
   });
 };

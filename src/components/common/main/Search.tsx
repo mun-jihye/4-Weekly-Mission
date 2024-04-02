@@ -13,12 +13,14 @@ const Search = ({ searchTerm, setSearchTerm, url }: SearchProps) => {
   const router = useRouter();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigateToKeyword(searchTerm);
+    navigateToKeyword();
   };
 
-  const navigateToKeyword = (input: string) => {
-    const keyword = input?.replace(/(\s*)/g, '');
-    if (keyword === '') return;
+  const navigateToKeyword = () => {
+    const keyword = searchTerm.replace(/(\s*)/g, '');
+    if (keyword === '') {
+      return;
+    }
 
     router.push({
       pathname: url,
@@ -61,11 +63,9 @@ const Search = ({ searchTerm, setSearchTerm, url }: SearchProps) => {
         />
       </SearchBar>
       {searchTerm && (
-        <>
-          <SearchResult>
-            <span>{searchTerm}</span>으로 검색한 결과입니다.
-          </SearchResult>
-        </>
+        <SearchResult>
+          <span>{searchTerm}</span>으로 검색한 결과입니다.
+        </SearchResult>
       )}
     </>
   );
