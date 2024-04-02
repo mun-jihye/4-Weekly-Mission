@@ -3,7 +3,7 @@ import Logo from '../Logo';
 import styled from 'styled-components';
 import Profile from './Profile';
 
-const Gnb = () => {
+const NavBar = () => {
   return (
     <Nav>
       <FlextContainer>
@@ -40,4 +40,4 @@ const FlextContainer = styled.div`
     padding: 0 20rem;
   }
 `;
-export default Gnb;
+export default NavBar;
