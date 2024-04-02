@@ -34,7 +34,6 @@ export async function getServerSideProps() {
 }
 
 const FolderPage = ({ categoryData, initialFolderData }: FolderPageProps) => {
-  console.log(categoryData, initialFolderData);
   const router = useRouter();
   const [headerRef, inHeaderView] = useInView();
   const [footerRef, inFooterView] = useInView();
@@ -50,7 +49,6 @@ const FolderPage = ({ categoryData, initialFolderData }: FolderPageProps) => {
     name: '전체',
   });
   const [folderData, setFolderData] = useState(initialFolderData);
-  const [isLoading, setIsLoading] = useState(false);
 
   const folderId = currentCategory.id === 'all' ? '' : currentCategory.id;
   const filteredLinks = filterByKeyword(folderData?.data || [], searchTerm);
@@ -69,10 +67,8 @@ const FolderPage = ({ categoryData, initialFolderData }: FolderPageProps) => {
 
   useEffect(() => {
     async function fetchData() {
-      setIsLoading(true);
       const data = await getFolderLink(folderId);
       setFolderData(data);
-      setIsLoading(false);
     }
     fetchData();
   }, [folderId]);
@@ -103,7 +99,7 @@ const FolderPage = ({ categoryData, initialFolderData }: FolderPageProps) => {
             handleCategoryButton={handleCategoryButton}
             categoryId={folderId}
           />
-          {isLoading ? (
+          {!folderData ? (
             <Loader />
           ) : hasFilteredLinks ? (
             <CardGrid datas={filteredLinks} isFolder={true} />
