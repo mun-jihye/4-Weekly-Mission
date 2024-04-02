@@ -1,12 +1,11 @@
 export interface FolderLink {
-  data: Object;
   id: number;
   title?: string;
   url: string;
   description?: string;
-  createdAt: string;
-  created_at: string;
-  imageSource: string;
+  createdAt?: string;
+  created_at?: string;
+  imageSource?: string;
   image_source?: string;
   folder_id?: number;
   updated_at?: string;

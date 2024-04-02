@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import StarButton from 'components/folder/StarButton';
 import KebabButton from 'components/folder/KebabButton';
 import Image from 'next/image';
+import { FolderLink } from 'types/folderDataType';
 
 /**
- *
+ * 개별 카드 컴포넌트
  * @param {Object} cardDatas
  * @param {number} cardDatas.id
  * @param {string} cardDatas.url
@@ -16,15 +17,13 @@ import Image from 'next/image';
  * @param {string} cardDatas.formattedDate
  * @param {boolean} cardDatas.isFolder
  */
-interface CardProps {
-  url: string;
+interface CardProps extends FolderLink {
   imageURL?: string;
-  title: string;
   timePassed: string;
-  description: string;
   formattedDate: string;
   isFolder: boolean;
 }
+
 const Card = ({
   url,
   imageURL,

@@ -4,9 +4,11 @@ import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import Modal from 'components/common/modal/Modal';
 import Image from 'next/image';
+
 interface AddLinkProps {
   isBottom: boolean;
 }
+
 const AddLink = ({ isBottom }: AddLinkProps) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
