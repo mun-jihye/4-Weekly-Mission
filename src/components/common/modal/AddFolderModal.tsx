@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import Button from '../Button';
 import styled from 'styled-components';
-import CategoryContext, { CategoryContextType } from 'contexts/CategoryContext';
+import CategoryContext from 'contexts/CategoryContext';
 import Image from 'next/image';
+import { CategoryData } from 'types/folderDataType';
 
 /**
  *
@@ -15,7 +16,7 @@ interface AddFolderModalProps {
 }
 
 const AddFolderModal = ({ subTitle }: AddFolderModalProps) => {
-  const folders = useContext<CategoryContextType | undefined>(CategoryContext);
+  const folders = useContext<CategoryData | undefined>(CategoryContext);
 
   const [isSelected, setIsSelected] = useState<{ [key: string]: boolean }>({});
 

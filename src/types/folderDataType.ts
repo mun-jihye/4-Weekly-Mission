@@ -14,7 +14,7 @@ export interface FolderLinkData {
   data: FolderLink[];
 }
 export interface Category {
-  id: number;
+  id: string;
   link: { count: number };
   created_at: string;
   favorite: boolean;
