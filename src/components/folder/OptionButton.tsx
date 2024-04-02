@@ -4,6 +4,7 @@ import Modal from 'components/common/modal/Modal';
 import PostModal from 'components/common/modal/PostModal';
 import DeleteModal from 'components/common/modal/DeleteModal';
 import ShareModal from 'components/common/modal/ShareModal';
+import Image from 'next/image';
 
 /**
  *
@@ -58,7 +59,7 @@ const OptionButton = ({
     <OptionContainer>
       {BUTTON.map(button => (
         <Option key={button.name} onClick={() => handleClick(button.name)}>
-          <OptionIcon $url={button.url}></OptionIcon>
+          <Image src={button.url} width={18} height={18} alt="icon" />
           <OptionText>{button.name}</OptionText>
         </Option>
       ))}
@@ -81,12 +82,7 @@ const Option = styled.button`
   gap: 0.4rem;
   cursor: pointer;
 `;
-const OptionIcon = styled.div<{ $url: string }>`
-  width: 1.8rem;
-  height: 1.8rem;
-  background-image: url(${({ $url }) => $url});
-  background-size: cover;
-`;
+
 const OptionText = styled.div`
   font-size: 1.4rem;
   font-weight: 600;

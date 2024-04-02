@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const SignInPage = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const SignInPage = () => {
   const handleClick = () => {
     router.push('/signup');
   };
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+  const handleBlur = (e?: FocusEvent<HTMLInputElement>) => {
     e.preventDefault();
   };
   const onSubmitForm = data => {
@@ -37,7 +38,12 @@ const SignInPage = () => {
         <FlexContainer>
           <Title>
             <Link href="/">
-              <Logo src="/images/linkbraryLogo.png" alt="로고이미지" />
+              <Image
+                src="/images/linkbraryLogo.png"
+                alt="로고이미지"
+                width={210}
+                height={38}
+              />
             </Link>
             <SubTitle>
               <span>회원이 아니신가요?</span>
@@ -125,9 +131,6 @@ const Title = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1.6rem;
-`;
-const Logo = styled.img`
-  height: 3.8rem;
 `;
 const SubTitle = styled.div`
   display: flex;

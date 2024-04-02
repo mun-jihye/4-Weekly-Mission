@@ -19,7 +19,6 @@ import Image from 'next/image';
 interface InputGroupProps {
   id?: string;
   type: string;
-  onChange?: () => void;
   placeholder?: string;
   label: string;
   isEyeIcon?: boolean;

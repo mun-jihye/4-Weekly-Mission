@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import Modal from 'components/common/modal/Modal';
 import PostModal from 'components/common/modal/PostModal';
-
+import Image from 'next/image';
 /**
  * Category 컴포넌트
  * @param {Object} props
@@ -20,7 +20,7 @@ interface CategoryData {
 interface CategoryProps {
   categoryDatas: CategoryData[];
   currentCategory: string;
-  handleCategoryButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleCategoryButton: () => void;
 }
 const Category = ({
   categoryDatas,
@@ -50,7 +50,13 @@ const Category = ({
         </CategoryContainer>
         <AddButton onClick={handleClick}>
           <Text>폴더 추가</Text>
-          <Image></Image>
+          <Img
+            src="/images/icons/add.png"
+            width={19}
+            height={19}
+            alt="폴더에 추가"
+          />
+          {/* <Image></Image> */}
         </AddButton>
         {showModal && (
           <Modal handleClose={() => setShowModal(false)} showModal={showModal}>
@@ -126,9 +132,7 @@ const Text = styled.div`
     color: ${props => props.theme.white};
   }
 `;
-const Image = styled.div`
-  width: 1.9rem;
-  height: 1.9rem;
+const Img = styled(Image)`
   background-image: url(/images/icons/add.png);
   background-repeat: no-repeat;
   background-size: cover;
