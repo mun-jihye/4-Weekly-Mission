@@ -4,3 +4,12 @@ export interface User {
   email: string;
   profileImageSource: string;
 }
+export interface LoginForm {
+  email: string;
+  password: string;
+}
+export interface SignUpForm {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
