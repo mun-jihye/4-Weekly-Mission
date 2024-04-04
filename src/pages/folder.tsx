@@ -14,7 +14,6 @@ import FixedAddLink from 'components/common/header/folder/FixedAddLink';
 import { useRouter } from 'next/router';
 import { getCategory, getFolderLink } from 'lib/folderAPI';
 import Head from 'next/head';
-import Footer from 'components/common/footer/Footer';
 import NavBar from 'components/common/header/NavBar';
 import { CategoryData, FolderLinkData } from 'types/folderDataType';
 
@@ -110,7 +109,6 @@ const FolderPage = ({ categoryData, initialFolderData }: FolderPageProps) => {
         </MainContainer>
         <div ref={footerRef}></div>
       </CategoryContext.Provider>
-      <Footer />
     </>
   );
 };

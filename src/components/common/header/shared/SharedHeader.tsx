@@ -5,7 +5,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { HeaderContainer } from 'styles/HeaderContainer';
 
-const Header = () => {
+const SharedHeader = () => {
   const { data, isLoading, isError, error } =
     useSampleFolderQuery('folderInfo');
 
@@ -68,4 +68,4 @@ const FolderName = styled.div`
   font-weight: 600;
   line-height: normal;
 `;
-export default Header;
+export default SharedHeader;

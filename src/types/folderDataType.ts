@@ -13,13 +13,16 @@ export interface FolderLink {
 export interface FolderLinkData {
   data: FolderLink[];
 }
+interface Link {
+  count: number;
+}
 export interface Category {
   id: string;
-  link: { count: number };
-  created_at: string;
-  favorite: boolean;
+  link?: Link;
+  created_at?: string;
+  favorite?: boolean;
   name: string;
-  user_id: number;
+  user_id?: number;
 }
 export interface CategoryData {
   data: Category[];

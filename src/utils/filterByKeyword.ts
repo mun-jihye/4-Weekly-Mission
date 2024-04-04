@@ -1,8 +1,10 @@
 import { FolderLink } from 'types/folderDataType';
+import { SharedLink } from 'types/sharedDataType';
 
 type Keyword = string | null;
+type Data = FolderLink[] | SharedLink[];
 
-const filterByKeyword = (data: FolderLink[], keyword: Keyword) => {
+const filterByKeyword = (data: Data, keyword: Keyword) => {
   if (!keyword) return data;
 
   const lowerCaseKeyword = keyword.toLowerCase();

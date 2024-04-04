@@ -1,3 +1,4 @@
+import Footer from 'components/common/footer/Footer';
 import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ThemeProvider } from 'styled-components';
@@ -19,6 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Component {...pageProps} />
+        <Footer />
       </ThemeProvider>
     </QueryClientProvider>
   );

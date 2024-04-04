@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Modal from 'components/common/modal/Modal';
 import PostModal from 'components/common/modal/PostModal';
 import Image from 'next/image';
+import { Category } from 'types/folderDataType';
 /**
  * Category 컴포넌트
  * @param {Object} props
@@ -12,13 +13,8 @@ import Image from 'next/image';
  * @returns {JSX.Element}
  */
 
-interface CategoryData {
-  id: string;
-  name: string;
-}
-
 interface CategoryProps {
-  categoryDatas: CategoryData[];
+  categoryDatas: Category[];
   currentCategory: string;
   handleCategoryButton: () => void;
 }
