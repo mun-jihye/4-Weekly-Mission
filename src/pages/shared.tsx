@@ -8,22 +8,30 @@ import { useRouter } from 'next/router';
 import filterByKeyword from 'utils/filterByKeyword';
 import Head from 'next/head';
 import { sampleFolderInquire } from 'lib/sampleAPI';
-import { SharedLink } from 'types/sharedDataType';
+import { SharedInfo, SharedLink } from 'types/sharedDataType';
 
 interface SharedPageProps {
   sharedDatas: SharedLink[];
+  folderInfo: SharedInfo;
 }
+
 export async function getStaticProps() {
   const sampleFolderData = await sampleFolderInquire();
+  const folderInfo = {
+    ownerName: sampleFolderData?.folder.owner.name,
+    folderName: sampleFolderData?.folder.name,
+    profileImage: sampleFolderData?.folder.owner.profileImageSource,
+  };
   const sharedDatas = sampleFolderData?.folder.links;
   return {
     props: {
       sharedDatas,
+      folderInfo,
     },
   };
 }
 
-const SharedPage = ({ sharedDatas }: SharedPageProps) => {
+const SharedPage = ({ sharedDatas, folderInfo }: SharedPageProps) => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState<string>(
     router.query.keyword ? String(router.query.keyword) : ''
@@ -41,7 +49,7 @@ const SharedPage = ({ sharedDatas }: SharedPageProps) => {
       <Head>
         <title>share | Linkbrary</title>
       </Head>
-      <SharedHeader />
+      <SharedHeader folderInfo={folderInfo} />
       <MainContainer>
         <Search
           searchTerm={searchTerm}

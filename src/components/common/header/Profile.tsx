@@ -1,28 +1,29 @@
-import { useUserQuery } from 'hooks/useFetchData';
 import Button from '../Button';
 import React from 'react';
 import styled from 'styled-components';
-import Loader from '../Loader';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { getUser } from 'lib/sampleAPI';
 
-const Profile = () => {
+export async function getServerSideProps() {
+  const profile = await getUser();
+  const profileData = profile.data;
+  return {
+    props: {
+      profile,
+      profileData,
+    },
+  };
+}
+const Profile = ({ profileData }) => {
   const router = useRouter();
 
   const handleClick = () => {
     router.push('/signin');
   };
 
-  const { data: profileData, isLoading } = useUserQuery();
   const data = profileData?.data[0];
 
-  if (isLoading) {
-    return (
-      <ProfileContainer>
-        <Loader />
-      </ProfileContainer>
-    );
-  }
   return (
     <>
       {data ? (
@@ -37,7 +38,7 @@ const Profile = () => {
           <ProfileEmail>{data.email}</ProfileEmail>
         </ProfileContainer>
       ) : (
-        <Button onClick={handleClick} className="login">
+        <Button onClick={handleClick} className="headerlogin">
           로그인
         </Button>
       )}

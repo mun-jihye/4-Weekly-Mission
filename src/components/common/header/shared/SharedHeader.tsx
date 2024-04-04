@@ -1,26 +1,21 @@
-import Loader from 'components/common/Loader';
-import { useSampleFolderQuery } from 'hooks/useFetchData';
+import CardError from 'components/common/main/CardError';
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { HeaderContainer } from 'styles/HeaderContainer';
+import NavBar from '../NavBar';
+import { SharedInfo } from 'types/sharedDataType';
 
-const SharedHeader = () => {
-  const { data, isLoading, isError, error } =
-    useSampleFolderQuery('folderInfo');
+interface SharedHeaderProps {
+  folderInfo: SharedInfo;
+}
 
-  const folderInfo = {
-    ownerName: data?.folder.owner.name,
-    folderName: data?.folder.name,
-    profileImage: data?.folder.owner.profileImageSource,
-  };
-  if (isError) {
-    console.log(error);
-  }
+const SharedHeader = ({ folderInfo }: SharedHeaderProps) => {
   return (
     <HeaderContainer>
-      {isLoading ? (
-        <Loader />
+      <NavBar />
+      {!folderInfo ? (
+        <CardError description="😰 데이터를 불러오는데 실패했습니다." />
       ) : (
         <HeroHeader>
           <StyledProfile>

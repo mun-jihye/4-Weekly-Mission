@@ -6,3 +6,8 @@ export interface SharedLink {
   title: string;
   url: string;
 }
+export interface SharedInfo {
+  ownerName: string;
+  folderName: string;
+  profileImage: string;
+}
