@@ -2,13 +2,14 @@ import React from 'react';
 import Logo from '../Logo';
 import styled from 'styled-components';
 import Profile from './Profile';
+import { UserData } from 'types/userDataType';
 
-const NavBar = () => {
+const NavBar = ({ profileData }: UserData) => {
   return (
     <Nav>
       <FlextContainer>
         <Logo />
-        <Profile />
+        <Profile profileData={profileData} />
       </FlextContainer>
     </Nav>
   );

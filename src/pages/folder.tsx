@@ -16,23 +16,33 @@ import { getCategory, getFolderLink } from 'lib/folderAPI';
 import Head from 'next/head';
 import NavBar from 'components/common/header/NavBar';
 import { CategoryData, FolderLinkData } from 'types/folderDataType';
+import { getUser } from 'lib/sampleAPI';
+import { User } from 'types/userDataType';
 
 interface FolderPageProps {
   categoryData: CategoryData;
   initialFolderData: FolderLinkData;
+  profileData: User;
 }
 export async function getServerSideProps() {
   const categoryData = await getCategory(1);
   const initialFolderData = await getFolderLink('');
+  const profile = await getUser();
+  const profileData = profile.data[0];
   return {
     props: {
       categoryData,
       initialFolderData,
+      profileData,
     },
   };
 }
 
-const FolderPage = ({ categoryData, initialFolderData }: FolderPageProps) => {
+const FolderPage = ({
+  categoryData,
+  initialFolderData,
+  profileData,
+}: FolderPageProps) => {
   const router = useRouter();
   const [headerRef, inHeaderView] = useInView();
   const [footerRef, inFooterView] = useInView();
@@ -82,7 +92,7 @@ const FolderPage = ({ categoryData, initialFolderData }: FolderPageProps) => {
         <title>folder | Linkbrary</title>
       </Head>
       <CategoryContext.Provider value={categoryData}>
-        <NavBar />
+        <NavBar profileData={profileData} />
         <HeaderContainer ref={headerRef}>
           <AddLink isBottom={false} />
         </HeaderContainer>

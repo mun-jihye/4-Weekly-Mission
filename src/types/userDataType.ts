@@ -2,7 +2,11 @@ export interface User {
   id: number;
   name: string;
   email: string;
-  profileImageSource: string;
+  image_source: string;
+  created_at: string;
+}
+export interface UserData {
+  profileData: User;
 }
 export interface LoginForm {
   email: string;

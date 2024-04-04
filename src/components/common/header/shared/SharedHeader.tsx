@@ -3,17 +3,19 @@ import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { HeaderContainer } from 'styles/HeaderContainer';
-import NavBar from '../NavBar';
 import { SharedInfo } from 'types/sharedDataType';
+import NavBar from '../NavBar';
+import { User } from 'types/userDataType';
 
 interface SharedHeaderProps {
   folderInfo: SharedInfo;
+  profileData: User;
 }
 
-const SharedHeader = ({ folderInfo }: SharedHeaderProps) => {
+const SharedHeader = ({ folderInfo, profileData }: SharedHeaderProps) => {
   return (
     <HeaderContainer>
-      <NavBar />
+      <NavBar profileData={profileData} />
       {!folderInfo ? (
         <CardError description="😰 데이터를 불러오는데 실패했습니다." />
       ) : (

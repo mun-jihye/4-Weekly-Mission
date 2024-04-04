@@ -7,16 +7,20 @@ import CardError from 'components/common/main/CardError';
 import { useRouter } from 'next/router';
 import filterByKeyword from 'utils/filterByKeyword';
 import Head from 'next/head';
-import { sampleFolderInquire } from 'lib/sampleAPI';
+import { getUser, sampleFolderInquire } from 'lib/sampleAPI';
 import { SharedInfo, SharedLink } from 'types/sharedDataType';
+import { User } from 'types/userDataType';
 
 interface SharedPageProps {
   sharedDatas: SharedLink[];
   folderInfo: SharedInfo;
+  profileData: User;
 }
 
 export async function getStaticProps() {
   const sampleFolderData = await sampleFolderInquire();
+  const profile = await getUser();
+  const profileData = profile.data[0];
   const folderInfo = {
     ownerName: sampleFolderData?.folder.owner.name,
     folderName: sampleFolderData?.folder.name,
@@ -27,11 +31,16 @@ export async function getStaticProps() {
     props: {
       sharedDatas,
       folderInfo,
+      profileData,
     },
   };
 }
 
-const SharedPage = ({ sharedDatas, folderInfo }: SharedPageProps) => {
+const SharedPage = ({
+  sharedDatas,
+  folderInfo,
+  profileData,
+}: SharedPageProps) => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState<string>(
     router.query.keyword ? String(router.query.keyword) : ''
@@ -49,7 +58,7 @@ const SharedPage = ({ sharedDatas, folderInfo }: SharedPageProps) => {
       <Head>
         <title>share | Linkbrary</title>
       </Head>
-      <SharedHeader folderInfo={folderInfo} />
+      <SharedHeader folderInfo={folderInfo} profileData={profileData} />
       <MainContainer>
         <Search
           searchTerm={searchTerm}

@@ -3,39 +3,27 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { getUser } from 'lib/sampleAPI';
+import { UserData } from 'types/userDataType';
 
-export async function getServerSideProps() {
-  const profile = await getUser();
-  const profileData = profile.data;
-  return {
-    props: {
-      profile,
-      profileData,
-    },
-  };
-}
-const Profile = ({ profileData }) => {
+const Profile = ({ profileData }: UserData) => {
   const router = useRouter();
 
   const handleClick = () => {
     router.push('/signin');
   };
 
-  const data = profileData?.data[0];
-
   return (
     <>
-      {data ? (
+      {profileData ? (
         <ProfileContainer>
           <Image
-            src={data.image_source}
+            src={profileData.image_source}
             alt="Profile"
             width={28}
             height={28}
             style={{ borderRadius: '1.5rem' }}
           />
-          <ProfileEmail>{data.email}</ProfileEmail>
+          <ProfileEmail>{profileData.email}</ProfileEmail>
         </ProfileContainer>
       ) : (
         <Button onClick={handleClick} className="headerlogin">
