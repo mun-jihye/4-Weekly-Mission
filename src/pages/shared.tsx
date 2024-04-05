@@ -17,7 +17,7 @@ interface SharedPageProps {
   profileData: User;
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const sampleFolderData = await sampleFolderInquire();
   const profile = await getUser();
   const profileData = profile.data[0];
