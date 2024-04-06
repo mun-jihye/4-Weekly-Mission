@@ -42,7 +42,9 @@ const InputLabel = ({
           <IconContainer onClick={handleClick}>
             <Image
               id="pw-eyeIcon"
-              src={`/images/icons/${showPassword ? 'eye-on' : 'eye-off'}.svg`}
+              src={`/images/icons/sign/${
+                showPassword ? 'eye-on' : 'eye-off'
+              }.svg`}
               alt={
                 showPassword ? '비밀번호 숨기기 아이콘' : '비밀번호 보기 아이콘'
               }

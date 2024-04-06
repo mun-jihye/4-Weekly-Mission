@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import InputForm from 'components/login/InputForm';
 import { SIGN_IN } from 'utils/constants/FORM_SIGNIN';
+import SocialLoigin from 'components/login/SocialLoigin';
 
 const SignInPage = () => {
   const router = useRouter();
@@ -41,6 +42,7 @@ const SignInPage = () => {
             inputInfo={SIGN_IN}
             defaultValues={{ email: '', password: '' }}
           />
+          <SocialLoigin description="소셜 로그인" />
         </FlexContainer>
       </MainContainer>
     </>
