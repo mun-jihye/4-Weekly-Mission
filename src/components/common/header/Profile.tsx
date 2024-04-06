@@ -11,26 +11,25 @@ const Profile = ({ profileData }: UserData) => {
   const handleClick = () => {
     router.push('/signin');
   };
+  if (!profileData) {
+    return (
+      <Button onClick={handleClick} className="headerlogin">
+        로그인
+      </Button>
+    );
+  }
 
   return (
-    <>
-      {profileData ? (
-        <ProfileContainer>
-          <Image
-            src={profileData.image_source}
-            alt="Profile"
-            width={28}
-            height={28}
-            style={{ borderRadius: '1.5rem' }}
-          />
-          <ProfileEmail>{profileData.email}</ProfileEmail>
-        </ProfileContainer>
-      ) : (
-        <Button onClick={handleClick} className="headerlogin">
-          로그인
-        </Button>
-      )}
-    </>
+    <ProfileContainer>
+      <Image
+        src={profileData.image_source}
+        alt="Profile"
+        width={28}
+        height={28}
+        style={{ borderRadius: '1.5rem' }}
+      />
+      <ProfileEmail>{profileData.email}</ProfileEmail>
+    </ProfileContainer>
   );
 };
 

@@ -17,7 +17,7 @@ interface CardGridProps {
 const CardGrid = ({ datas, isFolder }: CardGridProps) => {
   return (
     <CardContainer>
-      {datas?.map(data => {
+      {datas.map(data => {
         const {
           id,
           createdAt,

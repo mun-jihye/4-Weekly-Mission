@@ -8,13 +8,12 @@ const loginInquire = async data => {
     method: 'POST',
     data: data,
   });
-  if (res.ok) {
-    const token = await res.json();
-    const accessToken = token.data.accessToken;
-    const refreshToken = token.data.refreshToken;
-    setToken({ accessToken, refreshToken });
-    return res;
-  }
+
+  const token = await res.json();
+  const accessToken = token.data.accessToken;
+  const refreshToken = token.data.refreshToken;
+  setToken({ accessToken, refreshToken });
+  return res;
 };
 
 const emailCheckInquire = async data => {
@@ -32,13 +31,12 @@ const signUpInquire = async data => {
     method: 'POST',
     data: data,
   });
-  if (res.ok) {
-    const token = await res.json();
-    const accessToken = token.data.accessToken;
-    const refreshToken = token.data.refreshToken;
-    setToken({ accessToken, refreshToken });
-    return res;
-  }
+
+  const token = await res.json();
+  const accessToken = token.data.accessToken;
+  const refreshToken = token.data.refreshToken;
+  setToken({ accessToken, refreshToken });
+  return res;
 };
 
 export { loginInquire, emailCheckInquire, signUpInquire };

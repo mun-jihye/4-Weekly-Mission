@@ -31,18 +31,17 @@ const Category = ({
     <>
       <Wrapper>
         <CategoryContainer>
-          {categoryDatas &&
-            categoryDatas.map(categoryData => (
-              <CategoryButton
-                id={categoryData.id}
-                key={categoryData.id}
-                name={categoryData.name}
-                checked={currentCategory === categoryData.name ? true : null}
-                onClick={handleCategoryButton}
-              >
-                {categoryData.name}
-              </CategoryButton>
-            ))}
+          {categoryDatas.map(categoryData => (
+            <CategoryButton
+              id={categoryData.id}
+              key={categoryData.id}
+              name={categoryData.name}
+              checked={currentCategory === categoryData.name}
+              onClick={handleCategoryButton}
+            >
+              {categoryData.name}
+            </CategoryButton>
+          ))}
         </CategoryContainer>
         <AddButton onClick={handleClick}>
           <Text>폴더 추가</Text>
@@ -52,7 +51,6 @@ const Category = ({
             height={19}
             alt="폴더에 추가"
           />
-          {/* <Image></Image> */}
         </AddButton>
         {showModal && (
           <Modal handleClose={() => setShowModal(false)} showModal={showModal}>
@@ -64,7 +62,7 @@ const Category = ({
   );
 };
 interface ButtonProps {
-  checked?: boolean;
+  checked: boolean;
 }
 const Wrapper = styled.div`
   display: flex;

@@ -9,7 +9,6 @@ const nextConfig = {
 
     return config;
   },
-  styledComponents: true,
   images: {
     remotePatterns: [
       {

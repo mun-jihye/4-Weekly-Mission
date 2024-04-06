@@ -16,9 +16,6 @@ export const getFolderLink = async (
       method: 'GET',
     });
     return resData;
-  } else {
-    const resData = await fetchRequest({ url: FOLDER_LINK, method: 'GET' });
-    return resData;
   }
 };
 

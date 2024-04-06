@@ -19,16 +19,17 @@ interface OptionButtonProps {
   folderName: string;
   categoryId: number;
 }
+const BUTTON = [
+  { url: '/images/icons/share.png', name: '공유' },
+  { url: '/images/icons/pen.png', name: '이름 변경' },
+  { url: '/images/icons/delete.png', name: '삭제' },
+];
+
 const OptionButton = ({
   placeholder,
   folderName,
   categoryId,
 }: OptionButtonProps) => {
-  const BUTTON = [
-    { url: '/images/icons/share.png', name: '공유' },
-    { url: '/images/icons/pen.png', name: '이름 변경' },
-    { url: '/images/icons/delete.png', name: '삭제' },
-  ];
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalName, setModalName] = useState<string>('');
 
