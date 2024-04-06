@@ -1,31 +1,31 @@
-import Loader from 'components/common/Loader';
-import { useSampleFolderQuery } from 'hooks/useFetchData';
+import CardError from 'components/common/main/CardError';
+import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { HeaderContainer } from 'styles/HeaderContainer';
+import { SharedInfo } from 'types/sharedDataType';
+import NavBar from '../NavBar';
+import { User } from 'types/userDataType';
 
-const Header = () => {
-  const { data, isLoading, isError, error } =
-    useSampleFolderQuery('folderInfo');
+interface SharedHeaderProps {
+  folderInfo: SharedInfo;
+  profileData: User;
+}
 
-  const folderInfo = {
-    ownerName: data?.folder.owner.name,
-    folderName: data?.folder.name,
-    profileImage: data?.folder.owner.profileImageSource,
-  };
-  if (isError) {
-    console.log(error);
-  }
+const SharedHeader = ({ folderInfo, profileData }: SharedHeaderProps) => {
   return (
     <HeaderContainer>
-      {isLoading ? (
-        <Loader />
+      <NavBar profileData={profileData} />
+      {!folderInfo ? (
+        <CardError description="😰 데이터를 불러오는데 실패했습니다." />
       ) : (
         <HeroHeader>
           <StyledProfile>
             <ProfileImage
               src={folderInfo.profileImage}
               alt={folderInfo.ownerName}
+              width={60}
+              height={60}
             />
             <OwnerName>@{folderInfo.ownerName}</OwnerName>
           </StyledProfile>
@@ -50,9 +50,7 @@ const StyledProfile = styled.div`
   align-items: center;
   row-gap: 1rem;
 `;
-const ProfileImage = styled.img`
-  width: 6rem;
-  height: 6rem;
+const ProfileImage = styled(Image)`
   object-fit: cover;
 `;
 
@@ -67,4 +65,4 @@ const FolderName = styled.div`
   font-weight: 600;
   line-height: normal;
 `;
-export default Header;
+export default SharedHeader;

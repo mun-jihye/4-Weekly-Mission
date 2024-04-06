@@ -3,22 +3,49 @@ import SharedHeader from 'components/common/header/shared/SharedHeader';
 import Search from 'components/common/main/Search';
 import { MainContainer } from 'styles/MainContainer';
 import CardGrid from 'components/common/main/CardGrid';
-import { useSampleFolderQuery } from 'hooks/useFetchData';
 import CardError from 'components/common/main/CardError';
-import Loader from 'components/common/Loader';
 import { useRouter } from 'next/router';
 import filterByKeyword from 'utils/filterByKeyword';
 import Head from 'next/head';
-import Footer from 'components/common/footer/Footer';
+import { getUser, sampleFolderInquire } from 'lib/sampleAPI';
+import { SharedInfo, SharedLink } from 'types/sharedDataType';
+import { User } from 'types/userDataType';
 
-const SharedPage = () => {
+interface SharedPageProps {
+  sharedDatas: SharedLink[];
+  folderInfo: SharedInfo;
+  profileData: User;
+}
+
+export async function getServerSideProps() {
+  const sampleFolderData = await sampleFolderInquire();
+  const profile = await getUser();
+  const profileData = profile.data[0];
+  const folderInfo = {
+    ownerName: sampleFolderData?.folder.owner.name,
+    folderName: sampleFolderData?.folder.name,
+    profileImage: sampleFolderData?.folder.owner.profileImageSource,
+  };
+  const sharedDatas = sampleFolderData?.folder.links;
+  return {
+    props: {
+      sharedDatas,
+      folderInfo,
+      profileData,
+    },
+  };
+}
+
+const SharedPage = ({
+  sharedDatas,
+  folderInfo,
+  profileData,
+}: SharedPageProps) => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState<string>(
     router.query.keyword ? String(router.query.keyword) : ''
   );
 
-  const { data, isLoading, isError } = useSampleFolderQuery('sharedDatas');
-  const sharedDatas = data?.folder.links;
   const filteredLinks = filterByKeyword(sharedDatas || [], searchTerm);
   const hasFilteredLinks = filteredLinks.length !== 0;
 
@@ -26,30 +53,26 @@ const SharedPage = () => {
     setSearchTerm(router.query.keyword ? String(router.query.keyword) : '');
   }, [router.query.keyword]);
 
-  if (isError) {
-    return <CardError description="😰 저장된 링크가 없습니다." />;
-  }
   return (
     <>
       <Head>
         <title>share | Linkbrary</title>
       </Head>
-      <SharedHeader />
+      <SharedHeader folderInfo={folderInfo} profileData={profileData} />
       <MainContainer>
         <Search
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           url={router.pathname}
         />
-        {isLoading ? (
-          <Loader />
+        {!sharedDatas ? (
+          <CardError description="😰 저장된 링크가 없습니다." />
         ) : hasFilteredLinks ? (
           <CardGrid datas={filteredLinks} isFolder={false} />
         ) : (
           <CardError description="😰 일치하는 검색 결과가 없습니다." />
         )}
       </MainContainer>
-      <Footer />
     </>
   );
 };

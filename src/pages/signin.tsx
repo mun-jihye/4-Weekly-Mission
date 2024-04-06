@@ -1,32 +1,19 @@
-import InputGroup from 'components/login/InputGroup';
-import React, { FocusEvent } from 'react';
-import { ERROR_MESSAGES, PLACEHOLDER, REGEX } from 'utils/constants/VALIDATION';
-import { useForm } from 'react-hook-form';
-import Button from 'components/common/Button';
+import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
+import InputForm from 'components/login/InputForm';
+import { SIGN_IN } from 'utils/constants/FORM_SIGNIN';
 
 const SignInPage = () => {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting, errors },
-  } = useForm();
 
   const handleClick = () => {
     router.push('/signup');
   };
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    e.preventDefault();
-  };
-  const onSubmitForm = data => {
-    // if (!Object.keys(errors).length) {
-    // await new Promise(r => setTimeout(r, 1000));
-    // alert(JSON.stringify(data));
-    // }
+  const onSubmit = data => {
     console.log('회원가입 정보', data);
   };
 
@@ -37,59 +24,23 @@ const SignInPage = () => {
         <FlexContainer>
           <Title>
             <Link href="/">
-              <Logo src="/images/linkbraryLogo.png" alt="로고이미지" />
+              <Image
+                src="/images/linkbraryLogo.png"
+                alt="로고이미지"
+                width={210}
+                height={38}
+              />
             </Link>
             <SubTitle>
               <span>회원이 아니신가요?</span>
               <div onClick={handleClick}>회원 가입하기</div>
             </SubTitle>
           </Title>
-          <StyledForm onSubmit={handleSubmit(onSubmitForm)}>
-            <InputGroup
-              id="email"
-              label="email"
-              type="text"
-              placeholder={PLACEHOLDER.email}
-              handleBlur={handleBlur}
-              {...register('email', {
-                required: ERROR_MESSAGES.email_empty,
-                pattern: {
-                  value: REGEX.email,
-                  message: ERROR_MESSAGES.email_invalid,
-                },
-              })}
-              aria-invalid={errors.email ? true : false}
-              errmsg={
-                String(errors.email?.message) === 'undefined'
-                  ? null
-                  : String(errors.email?.message)
-              }
-            />
-            <InputGroup
-              id="password"
-              label="password"
-              type="password"
-              isEyeIcon={true}
-              placeholder={PLACEHOLDER.password}
-              handleBlur={handleBlur}
-              {...register('password', {
-                required: ERROR_MESSAGES.password_empty,
-                pattern: {
-                  value: REGEX.pw,
-                  message: ERROR_MESSAGES.password_invalid,
-                },
-              })}
-              aria-invalid={errors.password ? true : false}
-              errmsg={
-                String(errors.password?.message) === 'undefined'
-                  ? null
-                  : String(errors.password?.message)
-              }
-            />
-            <Button type="submit" disabled={isSubmitting} className="login">
-              로그인
-            </Button>
-          </StyledForm>
+          <InputForm
+            onSubmit={onSubmit}
+            inputInfo={SIGN_IN}
+            defaultValues={{ email: '', password: '' }}
+          />
         </FlexContainer>
       </MainContainer>
     </>
@@ -126,9 +77,6 @@ const Title = styled.div`
   align-items: center;
   gap: 1.6rem;
 `;
-const Logo = styled.img`
-  height: 3.8rem;
-`;
 const SubTitle = styled.div`
   display: flex;
   align-items: flex-start;
@@ -149,14 +97,6 @@ const SubTitle = styled.div`
     text-decoration: underline;
     cursor: pointer;
   }
-`;
-const StyledForm = styled.form`
-  max-width: 400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2rem;
 `;
 
 export default SignInPage;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Card from './Card';
 import { calculateTime, formatDate } from 'utils/date';
-import { Link, UserLinksData } from 'utils/filterByKeyword';
+import { FolderLink } from 'types/folderDataType';
 
 /**
  * CardGrid 컴포넌트
@@ -12,7 +12,7 @@ import { Link, UserLinksData } from 'utils/filterByKeyword';
  */
 interface CardGridProps {
   isFolder: boolean;
-  datas: (UserLinksData | Link)[];
+  datas: FolderLink[];
 }
 const CardGrid = ({ datas, isFolder }: CardGridProps) => {
   return (
@@ -33,6 +33,7 @@ const CardGrid = ({ datas, isFolder }: CardGridProps) => {
         const formattedDate = formatDate(createdAt || created_at);
         return (
           <Card
+            id={id}
             key={id}
             url={url}
             title={title}

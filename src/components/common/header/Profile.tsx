@@ -1,36 +1,32 @@
-import { useUserQuery } from 'hooks/useFetchData';
 import Button from '../Button';
 import React from 'react';
 import styled from 'styled-components';
-import Loader from '../Loader';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import { UserData } from 'types/userDataType';
 
-const Profile = () => {
+const Profile = ({ profileData }: UserData) => {
   const router = useRouter();
 
   const handleClick = () => {
     router.push('/signin');
   };
 
-  const { data: profileData, isLoading } = useUserQuery();
-  const data = profileData?.data[0];
-
-  if (isLoading) {
-    return (
-      <ProfileContainer>
-        <Loader />
-      </ProfileContainer>
-    );
-  }
   return (
     <>
-      {data ? (
+      {profileData ? (
         <ProfileContainer>
-          <ProfileImg src={data.image_source} alt="Profile" />
-          <ProfileEmail>{data.email}</ProfileEmail>
+          <Image
+            src={profileData.image_source}
+            alt="Profile"
+            width={28}
+            height={28}
+            style={{ borderRadius: '1.5rem' }}
+          />
+          <ProfileEmail>{profileData.email}</ProfileEmail>
         </ProfileContainer>
       ) : (
-        <Button onClick={handleClick} className="login">
+        <Button onClick={handleClick} className="headerlogin">
           로그인
         </Button>
       )}
@@ -43,11 +39,6 @@ const ProfileContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-`;
-const ProfileImg = styled.img`
-  width: 2.8rem;
-  height: 2.8rem;
-  border-radius: 1.5rem;
 `;
 const ProfileEmail = styled.p`
   font-size: 1.4rem;

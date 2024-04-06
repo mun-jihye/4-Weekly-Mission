@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import StarButton from 'components/folder/StarButton';
 import KebabButton from 'components/folder/KebabButton';
+import Image from 'next/image';
+import { FolderLink } from 'types/folderDataType';
 
 /**
- *
+ * 개별 카드 컴포넌트
  * @param {Object} cardDatas
  * @param {number} cardDatas.id
  * @param {string} cardDatas.url
@@ -15,15 +17,13 @@ import KebabButton from 'components/folder/KebabButton';
  * @param {string} cardDatas.formattedDate
  * @param {boolean} cardDatas.isFolder
  */
-interface CardProps {
-  url: string;
+interface CardProps extends FolderLink {
   imageURL?: string;
-  title: string;
   timePassed: string;
-  description: string;
   formattedDate: string;
   isFolder: boolean;
 }
+
 const Card = ({
   url,
   imageURL,
@@ -38,7 +38,22 @@ const Card = ({
     <>
       <StyledCard href={url} target="_blank" rel="noopener noreferrer">
         <CardImgContainer>
-          <CardImg src={imageURL || defaultImage} alt={title} />
+          {imageURL ? (
+            <CardImg
+              src={imageURL}
+              alt={title}
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          ) : (
+            <Image
+              src={defaultImage}
+              width={340}
+              height={180}
+              alt="존재하지 않는 이미지"
+            />
+          )}
+
           {isFolder && <StarButton />}
         </CardImgContainer>
         <TextContainer>
@@ -78,8 +93,9 @@ const CardImgContainer = styled.div`
   height: 20rem;
   border-radius: 1.5rem 1.5rem 0 0;
   overflow: hidden;
+  position: relative;
 `;
-const CardImg = styled.img`
+const CardImg = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;

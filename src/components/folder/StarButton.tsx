@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { styled } from 'styled-components';
 
 interface StarButtonProps {
@@ -11,7 +12,7 @@ const StarButton = ({ isActive }: StarButtonProps) => {
 
   return (
     <StyledButton>
-      <img src={src} alt="찜 버튼" />
+      <Image src={src} alt="찜 버튼" width={32} height={33} />
     </StyledButton>
   );
 };

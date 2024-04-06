@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -15,7 +16,7 @@ interface ShareModalProps {
 
 const ShareModal = ({ subTitle, categoryId }: ShareModalProps) => {
   const shareLink = `${window.location.origin}/shared/${categoryId}`;
-  const { Kakao } = window;
+  const { Kakao }: Window = window;
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -72,19 +73,34 @@ const ShareModal = ({ subTitle, categoryId }: ShareModalProps) => {
       <GridContainer>
         <FlexContainer>
           <StyledButton className="kakao" onClick={handleKakao}>
-            <img src="/images/modal/Kakao.png" alt="share by kakao" />
+            <Image
+              src="/images/modal/Kakao.png"
+              alt="share by kakao"
+              width={18}
+              height={18}
+            />
           </StyledButton>
           <StyledButtonName>카카오톡</StyledButtonName>
         </FlexContainer>
         <FlexContainer>
           <StyledButton className="facebook" onClick={handleFacebook}>
-            <img src="/images/icons/Facebook.png" alt="share by facebook" />
+            <Image
+              src="/images/icons/Facebook.png"
+              alt="share by facebook"
+              width={18}
+              height={18}
+            />
           </StyledButton>
           <StyledButtonName>페이스북</StyledButtonName>
         </FlexContainer>
         <FlexContainer>
           <StyledButton className="copyLInk" onClick={handleCopyLink}>
-            <img src="/images/modal/copyLink.png" alt="share by copy lInk" />
+            <Image
+              src="/images/modal/copyLink.png"
+              alt="share by copy lInk"
+              width={18}
+              height={18}
+            />
           </StyledButton>
           <StyledButtonName>링크 복사</StyledButtonName>
         </FlexContainer>

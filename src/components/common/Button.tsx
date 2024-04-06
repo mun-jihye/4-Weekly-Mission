@@ -58,6 +58,10 @@ const StyledButton = styled.button`
       width: 32.5rem;
     }
   }
+  &.headerlogin {
+    width: 12rem;
+    height: 5.3rem;
+  }
 
   &.folderLink {
     padding: 1rem 1.6rem;

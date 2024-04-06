@@ -2,14 +2,15 @@ import React from 'react';
 import Logo from '../Logo';
 import styled from 'styled-components';
 import Profile from './Profile';
+import { UserData } from 'types/userDataType';
 
-const GNB = () => {
+const NavBar = ({ profileData }: UserData) => {
   return (
     <Nav>
-      <Gnb>
+      <FlextContainer>
         <Logo />
-        <Profile />
-      </Gnb>
+        <Profile profileData={profileData} />
+      </FlextContainer>
     </Nav>
   );
 };
@@ -21,7 +22,7 @@ const Nav = styled.nav`
   width: 100%;
   background-color: #edf7ff;
 `;
-const Gnb = styled.div`
+const FlextContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,4 +41,4 @@ const Gnb = styled.div`
     padding: 0 20rem;
   }
 `;
-export default GNB;
+export default NavBar;

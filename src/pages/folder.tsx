@@ -14,21 +14,35 @@ import FixedAddLink from 'components/common/header/folder/FixedAddLink';
 import { useRouter } from 'next/router';
 import { getCategory, getFolderLink } from 'lib/folderAPI';
 import Head from 'next/head';
-import Footer from 'components/common/footer/Footer';
-import GNB from 'components/common/header/GNB';
+import NavBar from 'components/common/header/NavBar';
+import { CategoryData, FolderLinkData } from 'types/folderDataType';
+import { getUser } from 'lib/sampleAPI';
+import { User } from 'types/userDataType';
 
+interface FolderPageProps {
+  categoryData: CategoryData;
+  initialFolderData: FolderLinkData;
+  profileData: User;
+}
 export async function getServerSideProps() {
   const categoryData = await getCategory(1);
   const initialFolderData = await getFolderLink('');
+  const profile = await getUser();
+  const profileData = profile.data[0];
   return {
     props: {
       categoryData,
       initialFolderData,
+      profileData,
     },
   };
 }
 
-const FolderPage = ({ categoryData, initialFolderData }) => {
+const FolderPage = ({
+  categoryData,
+  initialFolderData,
+  profileData,
+}: FolderPageProps) => {
   const router = useRouter();
   const [headerRef, inHeaderView] = useInView();
   const [footerRef, inFooterView] = useInView();
@@ -44,7 +58,6 @@ const FolderPage = ({ categoryData, initialFolderData }) => {
     name: '전체',
   });
   const [folderData, setFolderData] = useState(initialFolderData);
-  const [isLoading, setIsLoading] = useState(false);
 
   const folderId = currentCategory.id === 'all' ? '' : currentCategory.id;
   const filteredLinks = filterByKeyword(folderData?.data || [], searchTerm);
@@ -63,10 +76,8 @@ const FolderPage = ({ categoryData, initialFolderData }) => {
 
   useEffect(() => {
     async function fetchData() {
-      setIsLoading(true);
       const data = await getFolderLink(folderId);
       setFolderData(data);
-      setIsLoading(false);
     }
     fetchData();
   }, [folderId]);
@@ -81,7 +92,7 @@ const FolderPage = ({ categoryData, initialFolderData }) => {
         <title>folder | Linkbrary</title>
       </Head>
       <CategoryContext.Provider value={categoryData}>
-        <GNB />
+        <NavBar profileData={profileData} />
         <HeaderContainer ref={headerRef}>
           <AddLink isBottom={false} />
         </HeaderContainer>
@@ -97,7 +108,7 @@ const FolderPage = ({ categoryData, initialFolderData }) => {
             handleCategoryButton={handleCategoryButton}
             categoryId={folderId}
           />
-          {isLoading ? (
+          {!folderData ? (
             <Loader />
           ) : hasFilteredLinks ? (
             <CardGrid datas={filteredLinks} isFolder={true} />
@@ -108,7 +119,6 @@ const FolderPage = ({ categoryData, initialFolderData }) => {
         </MainContainer>
         <div ref={footerRef}></div>
       </CategoryContext.Provider>
-      <Footer />
     </>
   );
 };
