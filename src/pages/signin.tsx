@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import InputForm from 'components/login/InputForm';
-import { SIGN_IN } from 'utils/constants/FORM_SIGNIN';
+import { SIGN_IN } from 'utils/constants/form/SIGNIN';
 import SocialLoigin from 'components/login/SocialLoigin';
 
 const SignInPage = () => {
@@ -15,7 +15,7 @@ const SignInPage = () => {
     router.push('/signup');
   };
   const onSubmit = data => {
-    console.log('회원가입 정보', data);
+    console.log('로그인 정보', data);
   };
 
   return (
@@ -56,7 +56,7 @@ const MainContainer = styled.div`
   padding: 23.8rem 0 25.2rem 0;
   justify-content: center;
   align-items: center;
-  background-color: var(--Linkbrary-bg, #f0f6ff);
+  background-color: ${({ theme }) => theme.linkbrary_bg};
 
   @media (min-width: 375px) and (max-width: 767px) {
     padding: 12rem 3.2rem 23.3rem 3.2rem;
