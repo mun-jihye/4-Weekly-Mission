@@ -8,12 +8,15 @@ export interface User {
 export interface UserData {
   profileData: User;
 }
-export type LoginForm = {
+export interface LoginForm {
   email: string;
   password: string;
-};
-export type SignUpForm = {
+}
+export interface SignUpForm {
   email: string;
   password: string;
   confirmPassword: string;
-};
+}
+export interface CheckEmail {
+  email: string;
+}

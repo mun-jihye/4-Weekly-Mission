@@ -56,7 +56,7 @@ const InputForm = ({
             placeholder={PLACEHOLDER.password_check}
             validation={{
               required: ERROR_MESSAGES.password_check,
-              validate: (value: any) =>
+              validate: (value: string) =>
                 value === watch('password') || '비밀번호가 일치하지 않습니다.',
             }}
             errmsg={errors['pwConfirm' as keyof typeof errors]?.message}

@@ -1,4 +1,4 @@
-import { LoginForm, SignUpForm } from 'types/userDataType';
+import { CheckEmail, LoginForm, SignUpForm } from 'types/userDataType';
 import { setToken } from '../utils/token';
 import { fetchRequest } from './index';
 import { CHECK_EMAIL_API, SIGNIN_API, SIGNUP_API } from 'utils/config.js';
@@ -14,7 +14,7 @@ const loginInquire = async (data: LoginForm) => {
   return res;
 };
 
-const emailCheckInquire = async data => {
+const checkEmailDuplicate = async (data: CheckEmail) => {
   const res = await fetchRequest({
     url: CHECK_EMAIL_API,
     method: 'POST',
@@ -34,4 +34,4 @@ const signUpInquire = async (data: SignUpForm) => {
   return res;
 };
 
-export { loginInquire, emailCheckInquire, signUpInquire };
+export { loginInquire, checkEmailDuplicate, signUpInquire };

@@ -1,5 +1,7 @@
 import { InputInfo } from 'types/inputInterface';
 import { ERROR_MESSAGES, PLACEHOLDER, REGEX } from './VALIDATION';
+import { checkEmailDuplicate } from 'lib/authAPI';
+import { CheckEmail } from 'types/userDataType';
 
 export const SIGN: InputInfo[] = [
   {
@@ -13,6 +15,19 @@ export const SIGN: InputInfo[] = [
         value: REGEX.email,
         message: ERROR_MESSAGES.email_invalid,
       },
+    },
+    validate: async (value: CheckEmail) => {
+      console.log(value);
+      try {
+        const isDuplicate = await checkEmailDuplicate(value);
+        if (isDuplicate) {
+          return ERROR_MESSAGES.email_duplicate;
+        }
+        return true;
+      } catch (error) {
+        console.error('Error validating email:', error);
+        return '이메일 유효성 검사 중 오류가 발생했습니다.';
+      }
     },
   },
   {

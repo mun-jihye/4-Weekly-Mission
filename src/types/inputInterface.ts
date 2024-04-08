@@ -24,4 +24,6 @@ export interface InputInfo extends InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
   validation?: ValidationRule;
   errmsg?: string;
+  /* eslint-disable-next-line */
+  validate?: (value: any) => Promise<boolean | string>;
 }
