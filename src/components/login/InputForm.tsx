@@ -5,6 +5,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import InputLabel from './InputLabel';
 import Button from 'components/common/Button';
 import { LoginForm, SignUpForm } from 'types/userDataType';
+import { ERROR_MESSAGES, PLACEHOLDER } from 'utils/constants/VALIDATION';
 
 type FormValues = LoginForm | SignUpForm;
 
@@ -12,15 +13,25 @@ interface InputFormProps {
   onSubmit: SubmitHandler<any>;
   defaultValues: Record<string, any>;
   inputInfo: InputInfo[];
+  buttonName: string;
+  isSignUp: boolean;
 }
-const InputForm = ({ inputInfo, onSubmit, defaultValues }: InputFormProps) => {
+const InputForm = ({
+  inputInfo,
+  onSubmit,
+  defaultValues,
+  buttonName,
+  isSignUp,
+}: InputFormProps) => {
   const methods = useForm<FormValues>({
     mode: 'onBlur',
     defaultValues: defaultValues,
   });
   const {
+    /* eslint-disable-next-line */
     handleSubmit,
     formState: { isSubmitting, errors },
+    watch,
   } = methods;
 
   return (
@@ -37,8 +48,22 @@ const InputForm = ({ inputInfo, onSubmit, defaultValues }: InputFormProps) => {
             errmsg={errors[input.id as keyof typeof errors]?.message}
           />
         ))}
+        {isSignUp && (
+          <InputLabel
+            id="pwConfirm"
+            label="비밀번호 확인"
+            type="password"
+            placeholder={PLACEHOLDER.password_check}
+            validation={{
+              required: ERROR_MESSAGES.password_check,
+              validate: (value: any) =>
+                value === watch('password') || '비밀번호가 일치하지 않습니다.',
+            }}
+            errmsg={errors['pwConfirm' as keyof typeof errors]?.message}
+          />
+        )}
         <Button type="submit" disabled={isSubmitting} className="login">
-          로그인
+          {buttonName}
         </Button>
       </StyledForm>
     </FormProvider>

@@ -2,7 +2,7 @@ import { InputHTMLAttributes } from 'react';
 
 export interface ValidationRule {
   required: string;
-  pattern: {
+  pattern?: {
     value: RegExp;
     message: string;
   };
@@ -14,6 +14,8 @@ export interface ValidationRule {
     value: number;
     message: string;
   };
+  /* eslint-disable-next-line */
+  validate?: (value: any) => boolean | string;
 }
 export interface InputInfo extends InputHTMLAttributes<HTMLInputElement> {
   id: string;

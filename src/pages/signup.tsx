@@ -41,6 +41,8 @@ const SignInPage = () => {
             onSubmit={onSubmit}
             inputInfo={SIGN_UP}
             defaultValues={{ email: '', password: '', pwConfirm: '' }}
+            buttonName="회원가입"
+            isSignUp={true}
           />
           <SocialLoigin description="다른 방식으로 가입하기" />
         </FlexContainer>

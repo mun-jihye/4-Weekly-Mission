@@ -41,6 +41,8 @@ const SignInPage = () => {
             onSubmit={onSubmit}
             inputInfo={SIGN_IN}
             defaultValues={{ email: '', password: '' }}
+            buttonName="로그인"
+            isSignUp={false}
           />
           <SocialLoigin description="소셜 로그인" />
         </FlexContainer>
