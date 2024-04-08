@@ -1,7 +1,7 @@
 import { InputInfo } from 'types/inputInterface';
-import { ERROR_MESSAGES, PLACEHOLDER, REGEX } from '../VALIDATION';
+import { ERROR_MESSAGES, PLACEHOLDER, REGEX } from './VALIDATION';
 
-export const SIGN_UP: InputInfo[] = [
+export const SIGN: InputInfo[] = [
   {
     id: 'email',
     type: 'text',

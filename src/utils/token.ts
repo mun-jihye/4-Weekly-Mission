@@ -8,6 +8,7 @@ export const setToken = ({
   localStorage.setItem('accessToken', accessToken);
   localStorage.setItem('refreshToken', refreshToken);
 };
+
 export const getToken = (): {
   accessToken: string | null;
   refreshToken: string | null;

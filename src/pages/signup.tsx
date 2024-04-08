@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import InputForm from 'components/login/InputForm';
-import { SIGN_UP } from 'utils/constants/form/SIGNUP';
+import { SIGN } from 'utils/constants/FORM_SIGN';
 import SocialLoigin from 'components/login/SocialLoigin';
+import { signUpInquire } from 'lib/authAPI';
+import { SignUpForm } from 'types/userDataType';
 
 const SignInPage = () => {
   const router = useRouter();
@@ -14,13 +16,30 @@ const SignInPage = () => {
   const handleClick = () => {
     router.push('/signin');
   };
-  const onSubmit = data => {
-    console.log('회원가입 정보', data);
+  const onSubmit = async (data: SignUpForm) => {
+    try {
+      const result = await signUpInquire(data);
+      if (result.data) {
+        alert('회원가입 성공!');
+        router.push('/folder');
+      }
+    } catch (e) {
+      alert('이메일 혹은 비밀번호를 확인해주세요!');
+    }
   };
 
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      router.push('/folder');
+    }
+    /* eslint-disable-next-line */
+  }, []);
   return (
     <>
-      <Head> signup | Linkbrary</Head>
+      <Head>
+        <title>signup | Linkbrary</title>
+      </Head>
       <MainContainer>
         <FlexContainer>
           <Title>
@@ -39,7 +58,7 @@ const SignInPage = () => {
           </Title>
           <InputForm
             onSubmit={onSubmit}
-            inputInfo={SIGN_UP}
+            inputInfo={SIGN}
             defaultValues={{ email: '', password: '', pwConfirm: '' }}
             buttonName="회원가입"
             isSignUp={true}
