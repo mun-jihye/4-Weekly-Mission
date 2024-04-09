@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from 'components/common/modal/Modal';
-import PostModal from 'components/common/modal/PostModal';
-import DeleteModal from 'components/common/modal/DeleteModal';
-import ShareModal from 'components/common/modal/ShareModal';
 import Image from 'next/image';
+import OptionContent from './OptionContent';
 
 /**
  *
@@ -37,24 +35,6 @@ const OptionButton = ({
     setShowModal(true);
     setModalName(name);
   };
-  const renderModalContent = () => {
-    switch (modalName) {
-      case '공유':
-        return <ShareModal subTitle={folderName} categoryId={categoryId} />;
-      case '이름 변경':
-        return (
-          <PostModal
-            title="폴더 이름 변경"
-            placeholder={placeholder}
-            isAdd={false}
-          />
-        );
-      case '삭제':
-        return <DeleteModal title="폴더 삭제" subTitle={folderName} />;
-      default:
-        return null;
-    }
-  };
 
   return (
     <OptionContainer>
@@ -66,7 +46,12 @@ const OptionButton = ({
       ))}
       {showModal && (
         <Modal showModal={showModal} handleClose={() => setShowModal(false)}>
-          {renderModalContent()}
+          <OptionContent
+            modalName={modalName}
+            folderName={folderName}
+            categoryId={categoryId}
+            placeholder={placeholder}
+          />
         </Modal>
       )}
     </OptionContainer>

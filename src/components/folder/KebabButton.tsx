@@ -2,9 +2,8 @@ import { styled } from 'styled-components';
 import { useState } from 'react';
 import BUTTON from 'utils/constants/BUTTON';
 import Modal from 'components/common/modal/Modal';
-import DeleteModal from 'components/common/modal/DeleteModal';
-import AddFolderModal from 'components/common/modal/AddFolderModal';
 import Image from 'next/image';
+import KebabContent from './KebabContent';
 
 /**
  *
@@ -27,16 +26,6 @@ const KebabButton = ({ url }: KebabButtonProps) => {
     setShowMenu(false);
     setShowModal(true);
     setOptionName(option);
-  };
-  const renderModalContent = () => {
-    switch (optionName) {
-      case '삭제하기':
-        return <DeleteModal title="링크 삭제" subTitle={url} />;
-      case '폴더에 추가':
-        return <AddFolderModal subTitle={url} />;
-      default:
-        return null;
-    }
   };
 
   return (
@@ -65,7 +54,7 @@ const KebabButton = ({ url }: KebabButtonProps) => {
       </StyledButton>
       {showModal && (
         <Modal showModal={showModal} handleClose={() => setShowModal(false)}>
-          {renderModalContent()}
+          <KebabContent optionName={optionName} url={url} />
         </Modal>
       )}
     </>
