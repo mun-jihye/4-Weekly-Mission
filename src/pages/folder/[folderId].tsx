@@ -18,6 +18,7 @@ import NavBar from 'components/common/header/NavBar';
 import { CategoryData, FolderLinkData } from 'types/folderDataType';
 import { getUser } from 'lib/sampleAPI';
 import { User } from 'types/userDataType';
+import { authCheck } from 'utils/authCheck';
 
 interface FolderPageProps {
   categoryData: CategoryData;
@@ -85,6 +86,11 @@ const FolderPage = ({
   useEffect(() => {
     setSearchTerm(router.query.keyword ? String(router.query.keyword) : '');
   }, [router.query.keyword]);
+
+  useEffect(() => {
+    authCheck(router);
+    /* eslint-disable-next-line */
+  }, []);
 
   return (
     <>

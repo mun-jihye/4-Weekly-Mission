@@ -10,6 +10,7 @@ import Head from 'next/head';
 import { getUser, sampleFolderInquire } from 'lib/sampleAPI';
 import { SharedInfo, SharedLink } from 'types/sharedDataType';
 import { User } from 'types/userDataType';
+import { authCheck } from 'utils/authCheck';
 
 interface SharedPageProps {
   sharedDatas: SharedLink[];
@@ -42,6 +43,7 @@ const SharedPage = ({
   profileData,
 }: SharedPageProps) => {
   const router = useRouter();
+  // const { folderId } = router.query;
   const [searchTerm, setSearchTerm] = useState<string>(
     router.query.keyword ? String(router.query.keyword) : ''
   );
@@ -52,6 +54,11 @@ const SharedPage = ({
   useEffect(() => {
     setSearchTerm(router.query.keyword ? String(router.query.keyword) : '');
   }, [router.query.keyword]);
+
+  useEffect(() => {
+    authCheck(router);
+    /* eslint-disable-next-line */
+  }, []);
 
   return (
     <>
